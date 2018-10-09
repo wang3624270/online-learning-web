@@ -4,7 +4,7 @@
       <el-form-item label="账号">
         <el-input v-model="form.loginName" placeholder="请输入用户名" id="loginName"></el-input>
       </el-form-item>
-      <el-form-item label="密码">
+      <el-form-item label="密码1">
         <el-input v-model="form.password" placeholder="请输入密码"></el-input>
       </el-form-item>
       <el-form-item>
@@ -35,7 +35,7 @@ export default {
       $.ajax({
         contentType : "application/json; charset=utf-8",
         type:"POST",
-        url:'/onlinelearning/func/auth/webLogin',
+        url:'http://localhost:8080/onlinelearning/func/auth/webLogin',
         data:JSON.stringify(this.form),
         success:function (result) {
           if(result.reCode==0){

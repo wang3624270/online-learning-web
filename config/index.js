@@ -9,15 +9,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      '/onlinelearning':{
-        target:'http://localhost:8080/onlinelearning',
-        changeOrigin:true,
-        pathRewrite :{
-          '^/onlinelearning':'',
-        }
-      }
-    },
+    proxyTable: {},
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8090, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
