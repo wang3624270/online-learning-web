@@ -1,6 +1,6 @@
 <template>
   <!-- mian-content -->
-  <div>
+  <div id="root">
     <header class="index-banner" id="home">
       <!-- nav -->
       <nav class="main-header d-flex">
@@ -654,20 +654,20 @@
 </template>
 
 <script>
-  import './assets/css/bootstrap.css';
-  import './assets/css/simpleLightbox.css';
-  import './assets/css/roadmap.css';
-  import './assets/css/snow.css';
-  import './assets/css/aos.css';
-  import './assets/css/aos-animation.css';
-  import './assets/css/style.css';
-  import './assets/css/fontawesome-all.css';
-  import './assets/css/font.css';
-  import AOS from 'aos';
-  import $ from 'jquery';
-  import LoginInterface from '@/interfaces/loginInterface';
+    import './assets/css/style.css';
+    import './assets/css/bootstrap.css';
+    import './assets/css/simpleLightbox.css';
+    import './assets/css/roadmap.css';
+    import './assets/css/snow.css';
+    import './assets/css/aos.css';
+    import './assets/css/aos-animation.css';
+    import './assets/css/fontawesome-all.css';
+    import './assets/css/font.css';
+    import AOS from 'aos';
+    import {scroll} from "./assets/js/scroll";
+    import LoginInterface from '@/interfaces/loginInterface';
 
-  export default {
+    export default {
     name: 'App',
     data () {
       return {
@@ -688,35 +688,7 @@
       });
     },
     beforeMount(){
-      //On Scroll Functionality
-      $(window).scroll(() => {
-        var windowTop = $(window).scrollTop();
-        windowTop > 100 ? $('nav').addClass('navShadow') : $('nav').removeClass('navShadow');
-        windowTop > 100 ? $('ul.nav-honey').css('top', '50px') : $('ul.nav-honey').css('top', '160px');
-      });
-      //Click Logo To Scroll To Top
-      $('#logo').on('click', () => {
-        $('html,body').animate({
-          scrollTop: 0
-        }, 500);
-      });
-      //Toggle Menu
-      $('#menu-toggle').on('click', () => {
-        $('#menu-toggle').toggleClass('closeMenu');
-        $('ul').toggleClass('showMenu');
-
-        $('li').on('click', () => {
-          $('ul').removeClass('showMenu');
-          $('#menu-toggle').removeClass('closeMenu');
-        });
-      });
-
-      $(".scroll").click(function(event) {
-        event.preventDefault();
-        $('html,body').animate({
-          scrollTop: $(this.hash).offset().top
-        }, 900);
-      });
+        scroll();
     },
     methods:{
       hideURLbar() {
@@ -729,7 +701,7 @@
         let params=this.form;
         LoginInterface.doLogin(params).then( (res) => {
           if (res.reCode == LoginInterface.SUCCESS_CODE) {
-            alert('success');
+            this.$router.push("index");
           } else {
             let errMsg = res.errMsg ? `${res.status}:${res.errMsg}` : res.status;
             this.$message.error(`出错啦【${errMsg}】，请稍后重试！😅`);
@@ -741,7 +713,31 @@
 </script>
 
 <style scoped>
-  ._input-width{
-    width: 270px;
-  }
+    h1 {
+        font-size: 2.5em !important;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        margin: 0 0 0 0 !important;
+    }
+    *+h1, *+h2, *+h3, *+h4, *+h5, *+h6 {
+        margin-top: 0em !important;
+    }
+    html, body {
+        height: inherit !important;
+        margin: 0 !important;
+        font-size: 100% !important;
+        font-family: 'Roboto', sans-serif !important;
+    }
+    .mb-lg-5, .my-lg-5 {
+        margin-bottom: 3rem !important;
+    }
+    .form-control {
+        height: 54px !important;
+    }
+    ._input-width{
+       width: 270px;
+    }
+    #root{
+        background: #fff;
+    }
 </style>

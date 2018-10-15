@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "amazeui": "^2.7.2",
     "aos": "^2.3.4",
     "element-ui": "^2.4.1",
     "jquery": "^3.3.1",
