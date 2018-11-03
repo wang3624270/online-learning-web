@@ -3,19 +3,19 @@ export default [
         label:'一级菜单1',
         icon:'am-icon-table',
         children:[
-            {label:'二级菜单1',path:'/index/test'},
-            {label:'二级菜单2',path:'#'},
-            {label:'二级菜单3',path:'#'},
-            {label:'二级菜单4',path:'#'},
-            {label:'二级菜单5',path:'#'},
-            {label:'二级菜单6',path:'#'}
+            {label:'二级菜单1',path:'/index/test',style:''},
+            {label:'二级菜单2',path:'#',style:''},
+            {label:'二级菜单3',path:'#',style:''},
+            {label:'二级菜单4',path:'#',style:''},
+            {label:'二级菜单5',path:'#',style:''},
+            {label:'二级菜单6',path:'#',style:''}
         ]
     },
     {
         label:'一级菜单2',
         icon:'am-icon-table',
         children:[
-            {label:'二级菜单1',path:'#'}
+            {label:'二级菜单1',path:'#',style:''}
         ]
     },
 ]

@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Homepage from '@/components/homepage'
-import Framepage from '@/components/framepage'
 import Testpage from '@/components/testpage'
 import Helloworld from '@/components/helloworld'
 
-Vue.use(Router)
+Vue.use(Router);
+//懒加载
+const Framepage = resolve => require(['@/components/framepage'], resolve);
 
 export default new Router({
   mode: 'history',

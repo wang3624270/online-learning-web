@@ -130,21 +130,21 @@
         </div>
         <div class="tpl-left-nav-list">
           <ul class="tpl-left-nav-menu">
-            <li class="tpl-left-nav-item">
+            <li class="tpl-left-nav-item" @click="clearMenu">
               <router-link to="/index" class="nav-link">
                 <i class="am-icon-home"></i>
                 <span>首页</span>
                </router-link>
             </li>
-            <li class="tpl-left-nav-item" v-for="item in navItems">
+            <li class="tpl-left-nav-item" v-for="(item,index1) in navItems">
               <a class="nav-link tpl-left-nav-link-list">
                 <i :class="item.icon"></i>
                 <span>{{item.label}}</span>
                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
               </a>
-              <ul class="tpl-left-nav-sub-menu" style="display: block;" v-for="subItem in item.children">
+              <ul @click="selectMenu(index1,index2)" class="tpl-left-nav-sub-menu" style="display: block;" v-for="(subItem,index2) in item.children">
                 <li>
-                  <router-link :to="subItem.path" name="second-level">
+                  <router-link :to="subItem.path" name="second-level" :class="subItem.style">
                     <i class="am-icon-angle-right"></i>
                     <span>{{subItem.label}}</span>
                   </router-link>
@@ -171,24 +171,41 @@
       import { iscroll } from'./assets/js/iscroll.js';
       import { app } from'./assets/js/app.js';
       import navItems from './navItems';
+      import AmazeUI  from 'amazeui';
+      import $ from 'jquery';
       export default {
           data () {
             return {
                 navItems:navItems,
                 clearHighlightItem:null,
+                lastIndex1:null,
+                lastIndex2:null
             }
           },
           mounted(){
-            iscroll(window, document, Math);
-            app();
+              iscroll(window, document, Math);
+              app();
           },
           methods:{
-
+              selectMenu(index1,index2){
+                  this.clearMenu();
+                  this.navItems[index1].children[index2].style='select-menu';
+                  this.lastIndex1=index1;
+                  this.lastIndex2=index2;
+                  console.log(this.navItems);
+              },
+              clearMenu(){
+                  if(this.lastIndex1!=null){
+                      this.navItems[this.lastIndex1].children[this.lastIndex2].style='';
+                  }
+              }
           }
       }
 </script>
 <style scoped>
     .select-menu{
         border-left: 3px solid #5C9ACF!important;
+        background: #f2f6f9;
+        margin-left: -3px;
     }
 </style>

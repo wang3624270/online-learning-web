@@ -654,13 +654,13 @@
 </template>
 
 <script>
-    import './assets/css/style.css';
     import './assets/css/bootstrap.css';
     import './assets/css/simpleLightbox.css';
     import './assets/css/roadmap.css';
     import './assets/css/snow.css';
     import './assets/css/aos.css';
     import './assets/css/aos-animation.css';
+    import './assets/css/style.css';
     import './assets/css/fontawesome-all.css';
     import './assets/css/font.css';
     import AOS from 'aos';
@@ -673,8 +673,8 @@
       return {
         dialogFormVisible: false,
         form:{
-          loginName:'',
-          password:'',
+          loginName:'teacher',
+          password:'1',
         },
       }
     },
@@ -713,31 +713,5 @@
 </script>
 
 <style scoped>
-    h1 {
-        font-size: 2.5em !important;
-    }
-    h1, h2, h3, h4, h5, h6 {
-        margin: 0 0 0 0 !important;
-    }
-    *+h1, *+h2, *+h3, *+h4, *+h5, *+h6 {
-        margin-top: 0em !important;
-    }
-    html, body {
-        height: inherit !important;
-        margin: 0 !important;
-        font-size: 100% !important;
-        font-family: 'Roboto', sans-serif !important;
-    }
-    .mb-lg-5, .my-lg-5 {
-        margin-bottom: 3rem !important;
-    }
-    .form-control {
-        height: 54px !important;
-    }
-    ._input-width{
-       width: 270px;
-    }
-    #root{
-        background: #fff;
-    }
+
 </style>
