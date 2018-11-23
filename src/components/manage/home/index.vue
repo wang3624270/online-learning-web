@@ -11,6 +11,7 @@
         <el-button type="primary" @click="onSubmit">登录测试</el-button>
         <el-button type="primary" @click="getData">获取数据测试</el-button>
         <el-button type="primary" @click="loginOut">注销测试</el-button>
+          <el-button type="primary" @click="fun1">注销测试</el-button>
       </el-form-item>
     </el-form>
     <el-alert :title="showContent" type="success" v-if="isShow"></el-alert>
@@ -30,6 +31,9 @@ export default {
     }
   },
   methods:{
+      fun1(){
+          this.$message.error(`出错啦【1】，请稍后重试！😅`);
+      },
     onSubmit(){
       let self=this;
       $.ajax({

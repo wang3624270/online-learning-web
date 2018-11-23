@@ -45,20 +45,18 @@ function formPost(url, data) {
 
 export default {
     SUCCESS_CODE: '0',
-
+    SUCCESS: '1',
 
     doLogin(data = {}) {
         let url = `http://${host}/auth/webLogin`;
         return post(url, data);
     },
-
-    getVideoSummaryPeriod(data = {}) {
-        let url = `http://${host}/qube/api/1.0/video/summary/period`
+    initMenu(data = {}) {
+        let url = `http://${host}/auth/menuInit`;
         return get(url, data);
     },
-
-    getUserDetail(data = {}) {
-        let url = `http://${host}/qube/api/1.0/user/detail/id`;
+    doLogout(data = {}) {
+        let url = `http://${host}/auth/webLogout`;
         return post(url, data);
     },
 

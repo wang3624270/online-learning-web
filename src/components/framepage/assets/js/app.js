@@ -11,9 +11,6 @@ export function app(){
             $fullText.text($.AMUI.fullscreen.isFullscreen ? '退出全屏' : '开启全屏');
         });
 
-
-
-
         $('.tpl-switch').find('.tpl-switch-btn-view').on('click', function() {
             $(this).prev('.tpl-switch-btn').prop("checked", function() {
                 if ($(this).is(':checked')) {
@@ -29,7 +26,6 @@ export function app(){
   // ==========================
   // 侧边导航下拉列表
   // ==========================
-
   $('.tpl-left-nav-link-list').on('click', function() {
     $(this).siblings('.tpl-left-nav-sub-menu').slideToggle(80)
       .end()
