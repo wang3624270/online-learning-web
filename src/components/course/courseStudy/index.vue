@@ -16,7 +16,7 @@
                     </el-form-item>
                 </el-form>
             </el-header>
-            <el-main>
+            <el-main  v-loading="loading">
                 <portal-course-item v-for="item in list" :data="item" :key="item.taskId"></portal-course-item>
                 <div id="clearFloat"></div>
             </el-main>
@@ -50,7 +50,7 @@
         methods:{
             search(){
                 this.loading=true;
-                let params={};
+                let params=this.form;
                 CourseInterface.getPersonalCoursesList(params).then( (res) => {
                     this.loading=false;
                     if (res.re == CourseInterface.SUCCESS) {

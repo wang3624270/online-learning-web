@@ -138,6 +138,14 @@ export default {
     getPersonalCoursesList(data = {}) {
         let url = `http://${host}/course/getPersonalCoursesList`;
         return post(url, data);
+    },
+    getCourseCommentList(data = {}) {
+        let url = `http://${host}/course/getCourseCommentList`;
+        return post(url, data);
+    },
+    addCourseComment(data = {}) {
+        let url = `http://${host}/course/addCourseComment`;
+        return post(url, data);
     }
 
 

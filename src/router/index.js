@@ -10,10 +10,13 @@ import ResourceManage from '@/components/course/resourceManage';
 import TermManage from '@/components/course/term';
 import TeachTackManage from '@/components/course/teachTackManage';
 import CourseStudy from '@/components/course/courseStudy';
+import CourseDetail from '@/components/course/courseStudy/courseDetail.vue';
+import VideoStudy from '@/components/player/videoPlayer';
 
 Vue.use(Router);
 //懒加载
 const Framepage = resolve => require(['@/components/framepage'], resolve);
+const Studypage = resolve => require(['@/components/player'], resolve);
 
 export default new Router({
     mode: 'history',
@@ -71,7 +74,24 @@ export default new Router({
                     path: '/index/course/courseStudy',
                     name: 'courseStudy',
                     component: CourseStudy
+                },
+                {
+                    path: '/index/course/courseDetail',
+                    name: 'courseDetail',
+                    component: CourseDetail
                 }
+            ]
+        },
+        {
+            path: '/study',
+            name: 'studypage',
+            component: Studypage,
+            children: [
+                {
+                    path: '/study/videoStudy',
+                    name: 'videoStudy',
+                    component: VideoStudy
+                },
             ]
         },
         {

@@ -3,17 +3,10 @@
         <header class="am-topbar am-topbar-inverse admin-header">
             <div class="am-topbar-brand">
                 <router-link to="/index" class="tpl-logo">
-                    <img src="./assets/img/logo.jpg" alt="">
+                    <img src="@/components/framepage/assets/img/logo.jpg" alt="">
                 </router-link>
             </div>
-            <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
-
-            </div>
-
-            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
-
             <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-
                 <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
                     <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                         <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
@@ -43,7 +36,7 @@
                             <li>
                                 <a href="#" class="tpl-dropdown-content-message">
                                 <span class="tpl-dropdown-content-photo">
-                      <img src="./assets/img/user02.png" alt=""> </span>
+                      <img src="@/components/framepage/assets/img/user02.png" alt=""> </span>
                                     <span class="tpl-dropdown-content-subject">
                       <span class="tpl-dropdown-content-from"> 禁言小张 </span>
                                 <span class="tpl-dropdown-content-time">10分钟前 </span>
@@ -52,7 +45,7 @@
                                 </a>
                                 <a href="#" class="tpl-dropdown-content-message">
                                 <span class="tpl-dropdown-content-photo">
-                      <img src="./assets/img/user03.png" alt=""> </span>
+                      <img src="@/components/framepage/assets/img/user03.png" alt=""> </span>
                                     <span class="tpl-dropdown-content-subject">
                       <span class="tpl-dropdown-content-from"> Steam </span>
                                 <span class="tpl-dropdown-content-time">18分钟前</span>
@@ -110,7 +103,7 @@
 
                     <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                         <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                            <span class="tpl-header-list-user-nick">{{perName}}</span><span class="tpl-header-list-user-ico"> <img src="./assets/img/user.png"></span>
+                            <span class="tpl-header-list-user-nick">{{perName}}</span><span class="tpl-header-list-user-ico"> <img src="@/components/framepage/assets/img/user.png"></span>
                         </a>
                         <ul class="am-dropdown-content">
                             <li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
@@ -121,57 +114,19 @@
                 </ul>
             </div>
         </header>
-
-        <div class="tpl-page-container tpl-page-header-fixed">
-
-            <div class="tpl-left-nav tpl-left-nav-hover">
-                <div class="tpl-left-nav-title">
-                    {{groupName}}
-                </div>
-                <div class="tpl-left-nav-list">
-                    <ul class="tpl-left-nav-menu">
-                        <li class="tpl-left-nav-item" @click="clearMenu">
-                            <router-link to="/index" class="nav-link">
-                                <i class="am-icon-home"></i>
-                                <span>首页</span>
-                            </router-link>
-                        </li>
-                        <li class="tpl-left-nav-item" v-for="(item,index1) in navItems">
-                            <a class="nav-link tpl-left-nav-link-list">
-                                <i :class="item.icon"></i>
-                                <span>{{item.label}}</span>
-                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
-                            </a>
-                            <ul @click="selectMenu(index1,index2)" class="tpl-left-nav-sub-menu" style="display: block;" v-for="(subItem,index2) in item.children">
-                                <li>
-                                    <router-link :to="subItem.path" name="second-level" :class="subItem.style">
-                                        <i class="am-icon-angle-right"></i>
-                                        <span>{{subItem.label}}</span>
-                                    </router-link>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tpl-content-wrapper">
-                <div class="tpl-portlet-components" style="min-height: 600px;">
-                    <router-view></router-view>
-                </div>
-            </div>
-
+        <div class="tpl-page-header-fixed">
+            <router-view></router-view>
         </div>
     </div>
 </template>
 <script>
-    import './assets/css/common.css';
-    import './assets/css/amazeui.min.css';
-    import './assets/css/admin.css';
-    import './assets/css/app.css';
-    import { iscroll } from'./assets/js/iscroll.js';
-    import { app } from'./assets/js/app.js';
-    import navItems from './navItems';
+    import '@/components/framepage/assets/css/common.css';
+    import '@/components/framepage/assets/css/amazeui.min.css';
+    import '@/components/framepage/assets/css/admin.css';
+    import '@/components/framepage/assets/css/app.css';
+    import { iscroll } from'@/components/framepage/assets/js/iscroll.js';
+    import { app } from'@/components/framepage/assets/js/app.js';
+    import navItems from '@/components/framepage/navItems';
     import AmazeUI  from 'amazeui';
     import LoginInterface from '@/interfaces/loginInterface';
     import ManageInterface from '@/interfaces/manageInterface';
@@ -190,15 +145,16 @@
         },
         beforeMount(){
             this.loading=true;
-            this.initMenu();
             this.initPersonInfo();
         },
         mounted(){
             iscroll(window, document, Math);
+            app();
         },
         methods:{
             initPersonInfo(){
                 ManageInterface.getPersonInfo({}).then( (res) => {
+                    this.loading=false;
                     if (res.re == ManageInterface.SUCCESS) {
                         let data=res.data;
                         this.groupName=data.groupName;
@@ -207,52 +163,6 @@
                         this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
                     }
                 });
-            },
-            initMenu(){
-                LoginInterface.initMenu({}).then( (res) => {
-                    if (res.re == LoginInterface.SUCCESS) {
-                        let menus=[];
-                        let pathList=[];
-                        let data=res.data;
-                        let menuList=data.menuList;
-                        for(let i=0;i<menuList.length;i++){
-                            pathList.push(menuList[i].path);
-                        }
-                        for(let i=0;i<navItems.length;i++){
-                            let items=navItems[i];
-                            let children=[];
-                            let subItems=items.children;
-                            for(let j=0;j<subItems.length;j++){
-                                let subItem=subItems[j];
-                                if(pathList.indexOf(subItem.path)!=-1){
-                                    subItem.style='';
-                                    children.push(subItem);
-                                }
-                            }
-                            if(children.length>0){
-                                items.children=children;
-                                menus.push(items);
-                            }
-                        }
-                        this.navItems=menus;
-                    } else {
-                        window.location.href='/';
-                    }
-                }).then(()=> {
-                    app();
-                    this.loading=false;
-                });
-            },
-            selectMenu(index1,index2){
-                this.clearMenu();
-                this.navItems[index1].children[index2].style='select-menu';
-                this.lastIndex1=index1;
-                this.lastIndex2=index2;
-            },
-            clearMenu(){
-                if(this.lastIndex1!=null){
-                    this.navItems[this.lastIndex1].children[this.lastIndex2].style='';
-                }
             },
             logout(){
                 this.loading=true;
@@ -265,9 +175,7 @@
     }
 </script>
 <style scoped>
-    .select-menu{
-        border-left: 3px solid #5C9ACF!important;
-        background: #f2f6f9;
-        margin-left: -3px;
+    #vjs_video_3{
+        width: 100%;
     }
 </style>

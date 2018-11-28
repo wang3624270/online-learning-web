@@ -128,8 +128,6 @@
 
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -673,7 +671,7 @@
             return {
                 dialogFormVisible: false,
                 form:{
-                    loginName:'teacher',
+                    loginName:'student',
                     password:'1',
                 },
                 loading:false
