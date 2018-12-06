@@ -643,11 +643,12 @@
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button type="text">注册账号</el-button>
+                <el-button type="text" @click="regist">注册账号</el-button>
                 <el-button type="primary" @click="doLogin">登 录</el-button>
                 <el-button type="text">忘记密码</el-button>
             </div>
         </el-dialog>
+        <portal-regist-page  ref="registPage"></portal-regist-page>
     </div>
 </template>
 
@@ -664,9 +665,9 @@
     import AOS from 'aos';
     import {scroll} from "./assets/js/scroll";
     import LoginInterface from '@/interfaces/loginInterface';
+    import RegistPage from './regist/index.vue';
 
     export default {
-        name: 'App',
         data () {
             return {
                 dialogFormVisible: false,
@@ -689,6 +690,9 @@
         beforeMount(){
             scroll();
         },
+        components:{
+            "portal-regist-page":RegistPage
+        },
         methods:{
             hideURLbar() {
                 window.scrollTo(0, 1);
@@ -707,6 +711,10 @@
                         this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
                     }
                 });
+            },
+            regist(){
+                this.dialogFormVisible=false;
+                this.$refs.registPage.show=true;
             }
         }
     };

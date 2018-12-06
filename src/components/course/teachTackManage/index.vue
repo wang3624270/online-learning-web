@@ -19,8 +19,14 @@
             </el-header>
             <el-main>
                 <el-table :data="list" border style="width: 100%" size="middle" v-loading="loading">
-                    <el-table-column type="index" label="序号" width="50px"></el-table-column>
+                    <el-table-column type="index" label="序号" width="50"></el-table-column>
                     <el-table-column prop="taskName" label="课程计划名称"></el-table-column>
+                    <el-table-column label="课程封面" width="155">
+                        <template slot-scope="scope">
+                            <img v-if="scope.row.coverImgAcc" :src='getImgSrc(scope.row.coverImgAcc)' alt='封面图片' class="cover-img">
+                            <img src='@/components/course/courseStudy/assets/img/default_cover_img.jpg' alt='封面图片' class="cover-img" v-else>
+                        </template>
+                    </el-table-column>
                     <el-table-column prop="courseName" label="课程名称"></el-table-column>
                     <el-table-column prop="courseType" label="课程类型" :formatter="formatCourseType"></el-table-column>
                     <el-table-column label="课程节次">
@@ -147,10 +153,16 @@
             editCourseSection(taskId){
                 this.$refs.sectionInfo.show=true;
                 this.$refs.sectionInfo.taskId=taskId;
+            },
+            getImgSrc(coverImgAcc){
+                return CourseInterface.coverImgUrl(coverImgAcc);
             }
         }
     }
 </script>
 <style scoped>
-
+    .cover-img{
+        width:144px;
+        height:84px
+    }
 </style>

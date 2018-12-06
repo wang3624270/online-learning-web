@@ -20,6 +20,12 @@
             <el-main>
                 <el-table :data="list" border style="width: 100%" size="middle" v-loading="loading">
                     <el-table-column type="index" label="序号" width="50px"></el-table-column>
+                    <el-table-column label="课程封面" width="160">
+                        <template slot-scope="scope">
+                            <img v-if="scope.row.coverImgAcc" :src='getImgSrc(scope.row.coverImgAcc)' alt='封面图片' class="cover-img">
+                            <img src='@/components/course/courseStudy/assets/img/default_cover_img.jpg' alt='封面图片' class="cover-img" v-else>
+                        </template>
+                    </el-table-column>
                     <el-table-column prop="courseName" label="课程名称"></el-table-column>
                     <el-table-column prop="courseType" label="课程类型" :formatter="formatCourseType"></el-table-column>
                     <el-table-column prop="teachGroup" label="任课教师"></el-table-column>
@@ -130,10 +136,16 @@
                     }
                 });
                 return str;
-            }
+            },
+            getImgSrc(coverImgAcc){
+                return CourseInterface.coverImgUrl(coverImgAcc);
+            },
         }
     }
 </script>
 <style scoped>
-
+    .cover-img{
+        width:144px;
+        height:84px
+    }
 </style>

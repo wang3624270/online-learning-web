@@ -146,6 +146,10 @@ export default {
     addCourseComment(data = {}) {
         let url = `http://${host}/course/addCourseComment`;
         return post(url, data);
+    },
+    entryTeachTask(data = {}) {
+        let url = `http://${host}/course/entryTeachTask`;
+        return post(url, data);
     }
 
 

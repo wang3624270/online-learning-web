@@ -12,6 +12,20 @@ import TeachTackManage from '@/components/course/teachTackManage';
 import CourseStudy from '@/components/course/courseStudy';
 import CourseDetail from '@/components/course/courseStudy/courseDetail.vue';
 import VideoStudy from '@/components/player/videoPlayer';
+import LectureManage from '@/components/lecture/lectureManage';
+import EntryManage from '@/components/lecture/entryManage';
+import AttendanceManage from '@/components/lecture/attendanceManage';
+import LecturePreview from '@/components/lecture/lecturePreview';
+import EntriedLecture from '@/components/lecture/entried';
+import DiscussPreview from '@/components/lecture/discussPreview';
+import FinishLecture from '@/components/lecture/finish';
+import CoursePreview from '@/components/course/coursePreview';
+import Lecture from '@/components/course/lecturePreview';
+import MeetingPreview from '@/components/course/meetingPreview';
+import ExamManage from '@/components/exam/examManage';
+import PracticeManage from '@/components/exam/practiceManage';
+import QuestionManage from '@/components/exam/questionManage';
+import QuestionExam from '@/components/exam/examManage/question';
 
 Vue.use(Router);
 //懒加载
@@ -79,6 +93,76 @@ export default new Router({
                     path: '/index/course/courseDetail',
                     name: 'courseDetail',
                     component: CourseDetail
+                },
+                {
+                    path: '/index/lecture/manage',
+                    name: 'lectureManage',
+                    component: LectureManage
+                },
+                {
+                    path: '/index/lecture/entry',
+                    name: 'entryManage',
+                    component: EntryManage
+                },
+                {
+                    path: '/index/lecture/attendance',
+                    name: 'attendanceManage',
+                    component: AttendanceManage
+                },
+                {
+                    path: '/index/lecture/lecturePreview',
+                    name: 'lecturePreview',
+                    component: LecturePreview
+                },
+                {
+                    path: '/index/lecture/entried',
+                    name: 'entriedLecture',
+                    component: EntriedLecture
+                },
+                {
+                    path: '/index/lecture/discussPreview',
+                    name: 'discussPreview',
+                    component: DiscussPreview
+                },
+                {
+                    path: '/index/lecture/finish',
+                    name: 'finishLecture',
+                    component: FinishLecture
+                },
+                {
+                    path: '/index/course/coursePreview',
+                    name: 'coursePreview',
+                    component: CoursePreview
+                },
+                {
+                    path: '/index/course/lecturePreview',
+                    name: 'lecture',
+                    component: Lecture
+                },
+                {
+                    path: '/index/course/meetingPreview',
+                    name: 'meetingPreview',
+                    component: MeetingPreview
+                },
+                {
+                    path: '/index/exam/examManage',
+                    name: 'examManage',
+                    component: ExamManage
+                },
+                {
+                    path: '/index/exam/practiceManage',
+                    name: 'practiceManage',
+                    component: PracticeManage
+                },
+                {
+                    path: '/index/exam/questionManage',
+                    name: 'questionManage',
+                    component: QuestionManage
+                },
+                {
+                    path: '/index/exam/questionExam',
+                    name: 'questionExam',
+                    component: QuestionExam
                 }
             ]
         },

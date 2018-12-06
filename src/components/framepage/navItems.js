@@ -53,17 +53,18 @@ export default [
         label:'考试管理',
         icon:'am-icon-table',
         children:[
-            {label:'在线练习管理',path:'/index/exam/charging'},
-            {label:'在线考试',path:'/index/exam/charging'},
-            {label:'题库管理',path:'/index/exam/statistics'}
+            {label:'在线考试',path:'/index/exam/examManage'},
+            {label:'在线练习',path:'/index/exam/practiceManage'},
+            {label:'题库管理',path:'/index/exam/questionManage'},
         ]
     },
     {
         label:'课程实践',
         icon:'am-icon-table',
         children:[
-            {label:'课程实践管理',path:'/index/course/charging'},
-            {label:'课程实践报名',path:'/index/course/statistics'}
+            {label:'课程实践管理',path:'/index/lecture/charging'},
+            {label:'课程实践报名审核',path:'/index/lecture/statistics'},
+            {label:'课程实践签到管理',path:'/index/lecture/statistics'}
         ]
     },
     {
@@ -77,25 +78,26 @@ export default [
         label:'讲座研讨',
         icon:'am-icon-table',
         children:[
-            {label:'讲座研讨管理',path:'/index/lecture/charging'},
-            {label:'讲座研讨报名',path:'/index/lecture/statistics'}
+            {label:'讲座研讨管理',path:'/index/lecture/manage'},
+            {label:'报名审核',path:'/index/lecture/entry'},
+            {label:'签到管理',path:'/index/lecture/attendance'}
         ]
     },
     {
         label:'课程中心',
         icon:'am-icon-table',
         children:[
-            {label:'在线课程',path:'/index/lecture/charging'},
-            {label:'讲座报告',path:'/index/lecture/statistics'},
-            {label:'重要会议',path:'/index/lecture/statistics'}
+            {label:'在线课程',path:'/index/course/coursePreview'},
+            {label:'讲座报告',path:'/index/course/lecturePreview'},
+            {label:'重要会议',path:'/index/course/meetingPreview'}
         ]
     },
     {
         label:'讲座研讨中心',
         icon:'am-icon-table',
         children:[
-            {label:'讲座研讨预览',path:''},
-            {label:'讲座研讨报名',path:''},
+            {label:'讲座预览',path:'/index/lecture/lecturePreview'},
+            {label:'课程研讨预览',path:'/index/lecture/discussPreview'}
         ]
     },
     {
@@ -119,8 +121,8 @@ export default [
         label:'我的讲座研讨',
         icon:'am-icon-table',
         children:[
-            {label:'已报名讲座研讨',path:''},
-            {label:'已完成讲座研讨',path:''},
+            {label:'已报名讲座研讨',path:'/index/lecture/entried'},
+            {label:'已完成讲座研讨',path:'/index/lecture/finish'},
         ]
     },
     {
