@@ -26,6 +26,9 @@ import ExamManage from '@/components/exam/examManage';
 import PracticeManage from '@/components/exam/practiceManage';
 import QuestionManage from '@/components/exam/questionManage';
 import QuestionExam from '@/components/exam/examManage/question';
+import QuestionPractice from '@/components/exam/practiceManage/question';
+import UnfinishedExam from '@/components/exam/unfinishedExam';
+import FinishedExam from '@/components/exam/finishedExam';
 
 Vue.use(Router);
 //懒加载
@@ -163,6 +166,21 @@ export default new Router({
                     path: '/index/exam/questionExam',
                     name: 'questionExam',
                     component: QuestionExam
+                },
+                {
+                    path: '/index/exam/questionPractice',
+                    name: 'questionPractice',
+                    component: QuestionPractice
+                },
+                {
+                    path: '/index/exam/unfinishedExam',
+                    name: 'unfinishedExam',
+                    component: UnfinishedExam
+                },
+                {
+                    path: '/index/exam/finishedExam',
+                    name: 'finishedExam',
+                    component: FinishedExam
                 }
             ]
         },

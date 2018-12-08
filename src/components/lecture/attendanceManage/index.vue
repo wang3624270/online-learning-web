@@ -24,18 +24,18 @@
                             <a href="#" @click="detail(scope.row)">{{scope.row.theme}}</a>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="lectureType" label="类型" :formatter="formatLectureType"></el-table-column>
+                    <el-table-column prop="lectureType" label="类型"   width="50" :formatter="formatLectureType"></el-table-column>
                     <el-table-column prop="startTime" label="活动时间" width="160px">
                         <template slot-scope="scope">
                             {{scope.row.startTimeStr}}-{{scope.row.endTimeStr}}
                         </template>
                     </el-table-column>
-                    <el-table-column label="报名通过人数">
+                    <el-table-column label="报名通过人数" width="120">
                         <template slot-scope="scope">
                             {{scope.row.checkedList.length}}
                         </template>
                     </el-table-column>
-                    <el-table-column fixed="right" label="操作">
+                    <el-table-column fixed="right" label="操作" width="80">
                         <template slot-scope="scope">
                             <el-button @click="check(scope.row,scope.row.checkedList)" type="text" size="small">签到记录</el-button>
                         </template>

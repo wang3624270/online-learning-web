@@ -113,8 +113,8 @@ export default [
         label:'我的考试',
         icon:'am-icon-table',
         children:[
-            {label:'考试信息查看',path:''},
-            {label:'在线考试',path:''},
+            {label:'待完成考试',path:'/index/exam/unfinishedExam'},
+            {label:'已完成考试',path:'/index/exam/finishedExam'},
         ]
     },
     {
@@ -129,10 +129,8 @@ export default [
         label:'我的学习统计',
         icon:'am-icon-table',
         children:[
-            {label:'总览',path:''},
-            {label:'课程学习成果',path:''},
-            {label:'在线考试成绩',path:''},
-            {label:'讲座研讨参与',path:''},
+            {label:'学习成果',path:''},
+            {label:'课程成绩',path:''},
         ]
     },
 ]

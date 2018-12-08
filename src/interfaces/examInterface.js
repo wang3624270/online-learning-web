@@ -86,7 +86,59 @@ export default {
     addQuestionFormHouse(data = {}) {
         let url = `http://${host}/exam/addQuestionFormHouse`;
         return post(url, data);
-    }
+    },
+    getPracticeList(data = {}) {
+        let url = `http://${host}/exam/getPracticeList`;
+        return post(url, data);
+    },
+    addOrEditPracticeInfo(data = {}) {
+        let url = `http://${host}/exam/addOrEditPracticeInfo`;
+        return post(url, data);
+    },
+    getPracticeQustionList(data = {}) {
+        let url = `http://${host}/exam/getPracticeQustionList`;
+        return post(url, data);
+    },
+    deletePracticeQuestionR(data = {}) {
+        let url = `http://${host}/exam/deletePracticeQuestionR`;
+        return post(url, data);
+    },
+    getHouseQustionListOfPractice(data = {}) {
+        let url = `http://${host}/exam/getHouseQustionListOfPractice`;
+        return post(url, data);
+    },
+    addQuestionFormHouseOfPractice(data = {}) {
+        let url = `http://${host}/exam/addQuestionFormHouseOfPractice`;
+        return post(url, data);
+    },
+    adjustPracticeQuestion(data = {}) {
+        let url = `http://${host}/exam/adjustPracticeQuestion`;
+        return post(url, data);
+    },
+    getUnfinishedExamList(data = {}) {
+        let url = `http://${host}/exam/getUnfinishedExamList`;
+        return get(url, data);
+    },
+    getOnlineExamQustionList(data = {}) {
+        let url = `http://${host}/exam/getOnlineExamQustionList`;
+        return post(url, data);
+    },
+    submitExamAnswers(data = {}) {
+        let url = `http://${host}/exam/submitExamAnswers`;
+        return post(url, data);
+    },
+    getFinishNumber(data = {}) {
+        let url = `http://${host}/exam/getFinishNumber`;
+        return post(url, data);
+    },
+    getFinishedExamList(data = {}) {
+        let url = `http://${host}/exam/getFinishedExamList`;
+        return get(url, data);
+    },
+    calculateScore(data = {}) {
+        let url = `http://${host}/exam/calculateScore`;
+        return post(url, data);
+    },
 
 
 };

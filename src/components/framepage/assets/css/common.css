@@ -13,3 +13,6 @@
     overflow:hidden;
     visibility:hidden;
 }
+.el-pagination {
+     text-align: right;
+ }

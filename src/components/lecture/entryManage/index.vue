@@ -24,7 +24,7 @@
                             <a href="#" @click="detail(scope.row)">{{scope.row.theme}}</a>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="lectureType" label="类型" :formatter="formatLectureType"></el-table-column>
+                    <el-table-column prop="lectureType" label="类型" :formatter="formatLectureType" width="50"></el-table-column>
                     <el-table-column prop="startTime" label="活动时间" width="160px">
                         <template slot-scope="scope">
                             {{scope.row.startTimeStr}}-{{scope.row.endTimeStr}}
@@ -35,23 +35,23 @@
                             {{scope.row.registStart}}-{{scope.row.registEnd}}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="maxNumber" label="最大人数"></el-table-column>
-                    <el-table-column label="已报名人数">
+                    <el-table-column prop="maxNumber" label="最大人数"  width="80"></el-table-column>
+                    <el-table-column label="已报名" width="70">
                         <template slot-scope="scope">
                             <a href="#" @click="check(scope.row,'已报名列表',scope.row.applyList)">{{scope.row.applyList.length}}</a>
                         </template>
                     </el-table-column>
-                    <el-table-column label="已通过人数">
+                    <el-table-column label="已通过" width="70">
                         <template slot-scope="scope">
                             <a href="#" @click="check(scope.row,'已审核通过列表',scope.row.checkedList)">{{scope.row.checkedList.length}}</a>
                         </template>
                     </el-table-column>
-                    <el-table-column label="剩余通过名额">
+                    <el-table-column label="剩余名额" width="80">
                         <template slot-scope="scope">
                             {{scope.row.auditedList.length}}
                         </template>
                     </el-table-column>
-                    <el-table-column fixed="right" label="操作">
+                    <el-table-column fixed="right" label="操作" width="70">
                         <template slot-scope="scope">
                             <el-button @click="check(scope.row,'待审核列表',scope.row.auditedList)" type="text" size="small">报名审核</el-button>
                         </template>

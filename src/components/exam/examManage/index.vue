@@ -27,6 +27,13 @@
                     </el-table-column>
                     <el-table-column prop="startDate" label="考试开始时间" width="150"></el-table-column>
                     <el-table-column prop="endDate" label="考试结束时间" width="150"></el-table-column>
+                    <el-table-column label="考试成绩" width="100">
+                        <template slot-scope="scope">
+                            <span v-if="scope.row.finish!='1'">考试未结束</span>
+                            <el-button @click="calcluate(scope.row)" type="text" size="small"v-if="scope.row.finish=='1' && scope.row.state=='0'">点击公布成绩</el-button>
+                            <el-button @click="seeScore(scope.row)" type="text" size="small"v-if="scope.row.finish=='1' && scope.row.state=='1'">查看学生成绩</el-button>
+                        </template>
+                    </el-table-column>
                     <el-table-column fixed="right" label="操作">
                         <template slot-scope="scope">
                             <el-button @click="edit(scope.row)" type="text" size="small">考试信息</el-button>
@@ -99,6 +106,23 @@
                     path: '/index/exam/questionExam',
                     query: { examId: params.examId }
                 });
+            },
+            calcluate(exam){
+                this.loading=true;
+                let params={
+                    examId:exam.examId
+                };
+                ExamInterface.calculateScore(params).then( (res) => {
+                    this.loading=false;
+                    if (res.re == ExamInterface.SUCCESS) {
+                        this.search();
+                    } else {
+                        this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
+                    }
+                });
+            },
+            seeScore(){
+
             }
         }
     }
