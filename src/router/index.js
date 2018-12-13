@@ -29,6 +29,7 @@ import QuestionExam from '@/components/exam/examManage/question';
 import QuestionPractice from '@/components/exam/practiceManage/question';
 import UnfinishedExam from '@/components/exam/unfinishedExam';
 import FinishedExam from '@/components/exam/finishedExam';
+import TeachTackMaintain from '@/components/course/teachTackMaintain';
 
 Vue.use(Router);
 //懒加载
@@ -181,6 +182,11 @@ export default new Router({
                     path: '/index/exam/finishedExam',
                     name: 'finishedExam',
                     component: FinishedExam
+                },
+                {
+                    path: '/index/course/teachTackMaintain',
+                    name: 'teachTackMaintain',
+                    component: TeachTackMaintain
                 }
             ]
         },

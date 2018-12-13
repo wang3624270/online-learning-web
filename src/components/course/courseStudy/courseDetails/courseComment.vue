@@ -35,8 +35,8 @@
                     <div class="comment-name">{{item.perName}}</div>
                     <div class="comment-content">{{item.comment}}</div>
                     <div class="comment-time">
-                        <span class="comment-time-1">时间:{{item.createTimeStr}}</span>
-                        <span>评分：{{item.courseScoreStr}}</span>
+                        <span class="comment-time-1">时间 : {{item.createTimeStr}}</span>
+                        <span>评分 : {{item.courseScoreStr}}</span>
                     </div>
                 </div>
             </li>

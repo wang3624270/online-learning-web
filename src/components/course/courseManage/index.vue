@@ -33,8 +33,6 @@
                     <el-table-column fixed="right" label="操作">
                         <template slot-scope="scope">
                             <el-button @click="edit(scope.row.courseId)" type="text" size="small">课程信息</el-button>
-                            <el-button @click="download(scope.row.courseId)" type="text" size="small">课程目录</el-button>
-                            <el-button @click="download(scope.row.courseId)" type="text" size="small">目录资源</el-button>
                             <el-button @click="deleteCourse(scope.row.courseId)" type="text" size="small">删除</el-button>
                         </template>
                     </el-table-column>

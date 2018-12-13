@@ -37,8 +37,7 @@ export default [
         children:[
             {label:'学期管理',path:'/index/course/term'},
             {label:'课程计划管理',path:'/index/course/teachTackManage'},
-            {label:'评论管理',path:'/index/course/statistics'},
-            {label:'问答管理',path:'/index/course/statistics'}
+            {label:'课程计划维护',path:'/index/course/teachTackMaintain'}
         ]
     },
     {

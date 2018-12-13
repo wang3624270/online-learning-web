@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-dialog title="课程节次关联资源" :visible.sync="show" width="1000px" v-loading="loading"  append-to-body>
+        <el-dialog title="课程资料目录关联资源" :visible.sync="show" width="1000px" v-loading="loading"  append-to-body>
             <el-form :inline="true" :model="form" class="demo-form-inline" size="middle">
                 <el-form-item label="资源名称">
                     <el-input v-model="form.accName" placeholder="请输入资源名称"></el-input>
@@ -22,12 +22,9 @@
                 <el-table-column prop="accType" label="类型" width="50px"></el-table-column>
                 <el-table-column prop="uploader" label="上传者" width="80px"></el-table-column>
                 <el-table-column prop="uploadDate" label="上传时间"  width="150px"></el-table-column>
-                <el-table-column label="操作" width="100">
+                <el-table-column label="操作" >
                     <template slot-scope="scope">
-                        <el-button @click="relate(scope.row.accId,'VIDEO')" type="text" size="mini">关联视频</el-button>
-                        <!--<el-button @click="relate(scope.row.accId,'AUDIO')" type="text" size="mini">关联音频</el-button>-->
-                        <!--<el-button @click="relate(scope.row.accId,'PPT')" type="text" size="mini">关联课件</el-button>-->
-                        <!--<el-button @click="relate(scope.row.accId,'PRACTICE')" type="text" size="mini">关联在线练习</el-button>-->
+                        <el-button @click="relate(scope.row.accId)" type="text" size="mini">关联</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -48,7 +45,7 @@
                     accType:'',
                     perName:''
                 },
-                sectionId:'',
+                folderId:'',
                 show: false,
                 list:[],
                 loading:false
@@ -78,14 +75,13 @@
             close(){
                 this.show=false;
             },
-            relate(accId,type){
+            relate(accId){
                 this.loading=true;
                 let params={
                     accId:accId,
-                    type:type,
-                    sectionId:this.sectionId
+                    folderId:this.folderId
                 };
-                CourseInterface.matchSectionAndResource(params).then( (res) => {
+                CourseInterface.matchFolderAndResource(params).then( (res) => {
                     this.loading=false;
                     if (res.re == CourseInterface.SUCCESS) {
                         this.show = false;

@@ -150,7 +150,80 @@ export default {
     entryTeachTask(data = {}) {
         let url = `http://${host}/course/entryTeachTask`;
         return post(url, data);
+    },
+    getCourseResourceList(data = {}) {
+        let url = `http://${host}/course/getCourseResourceList`;
+        return post(url, data);
+    },
+    addOrEditCourseResource(data = {}) {
+        let url = `http://${host}/course/addOrEditCourseResource`;
+        return post(url, data);
+    },
+    matchFolderAndResource(data = {}) {
+        let url = `http://${host}/course/matchFolderAndResource`;
+        return post(url, data);
+    },
+    cancelMatchFolderAndResource(data = {}) {
+        let url = `http://${host}/course/cancelMatchFolderAndResource`;
+        return post(url, data);
+    },
+    getCoursePersonList(data = {}) {
+        let url = `http://${host}/course/getCoursePersonList`;
+        return post(url, data);
+    },
+    getNotMapPersonList(data = {}) {
+        let url = `http://${host}/course/getNotMapPersonList`;
+        return post(url, data);
+    },
+    addToTask(data = {}) {
+        let url = `http://${host}/course/addToTask`;
+        return post(url, data);
+    },
+    deletePeopleFromPlan(data = {}) {
+        let url = `http://${host}/course/deletePeopleFromPlan`;
+        return post(url, data);
+    },
+    getAllTaskNewsInfo(data = {}) {
+        let url = `http://${host}/course/getAllTaskNewsInfo`;
+        return post(url, data);
+    },
+    deleteTaskNews(data = {}) {
+        let url = `http://${host}/course/deleteTaskNews`;
+        return post(url, data);
+    },
+    addOrEditTaskNews(data = {}) {
+        let url = `http://${host}/course/addOrEditTaskNews`;
+        return post(url, data);
+    },
+    deleteComment(data = {}) {
+        let url = `http://${host}/course/deleteComment`;
+        return post(url, data);
+    },
+    getCourseInterlocutionList(data = {}) {
+        let url = `http://${host}/course/getCourseInterlocutionList`;
+        return post(url, data);
+    },
+    submitInterlocutionReplay(data = {}) {
+        let url = `http://${host}/course/submitInterlocutionReplay`;
+        return post(url, data);
+    },
+    deleteInterlocution(data = {}) {
+        let url = `http://${host}/course/deleteInterlocution`;
+        return post(url, data);
+    },
+    getSectionResourceInfo(data = {}) {
+        let url = `http://${host}/course/getSectionResourceInfo`;
+        return post(url, data);
+    },
+    videoPlayUrl(accId) {
+        let url = `http://${resourceHost}/videoPlay?accId=`+accId;
+        return url;
+    },
+    submitInterlocutionQuestion(data = {}) {
+        let url = `http://${host}/course/submitInterlocutionQuestion`;
+        return post(url, data);
     }
+
 
 
 };

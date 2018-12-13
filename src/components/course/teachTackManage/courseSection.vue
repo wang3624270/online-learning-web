@@ -6,25 +6,25 @@
             <el-table :data="list" border style="width: 100%" size="middle">
                 <el-table-column prop="orderNum" label="次序" width="50px"></el-table-column>
                 <el-table-column prop="sectionName" label="节次名称"></el-table-column>
-                <el-table-column prop="courseName" label="视频" width="80px">
+                <el-table-column prop="courseName" label="视频" width="120px">
                     <template slot-scope="scope" v-if="scope.row.videoAcc">
                         <el-button @click="preview(scope.row.videoAcc)" type="text" size="mini">预览</el-button>
                         <el-button @click="cancel(scope.row.videoId)" type="text" size="mini">取消关联</el-button>
                     </template>
                 </el-table-column>
-                <el-table-column prop="courseName" label="音频" width="80px">
-                    <template slot-scope="scope" v-if="scope.row.audioAcc">
-                        <el-button @click="preview(scope.row.audioAcc)" type="text" size="mini">预览</el-button>
-                        <el-button @click="cancel(scope.row.audioId)" type="text" size="mini">取消关联</el-button>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="courseName" label="课件" width="80px">
-                    <template slot-scope="scope" v-if="scope.row.pptAcc">
-                        <el-button @click="preview(scope.row.pptAcc)" type="text" size="mini">预览</el-button>
-                        <el-button @click="cancel(scope.row.pptId)" type="text" size="mini">取消关联</el-button>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="courseName" label="在线练习" width="80px"></el-table-column>
+                <!--<el-table-column prop="courseName" label="音频" width="80px">-->
+                    <!--<template slot-scope="scope" v-if="scope.row.audioAcc">-->
+                        <!--<el-button @click="preview(scope.row.audioAcc)" type="text" size="mini">预览</el-button>-->
+                        <!--<el-button @click="cancel(scope.row.audioId)" type="text" size="mini">取消关联</el-button>-->
+                    <!--</template>-->
+                <!--</el-table-column>-->
+                <!--<el-table-column prop="courseName" label="课件" width="80px">-->
+                    <!--<template slot-scope="scope" v-if="scope.row.pptAcc">-->
+                        <!--<el-button @click="preview(scope.row.pptAcc)" type="text" size="mini">预览</el-button>-->
+                        <!--<el-button @click="cancel(scope.row.pptId)" type="text" size="mini">取消关联</el-button>-->
+                    <!--</template>-->
+                <!--</el-table-column>-->
+                <el-table-column prop="courseName" label="在线练习" width="120px"></el-table-column>
                 <el-table-column label="操作"  width="240px">
                     <template slot-scope="scope">
                         <el-button @click="edit(scope.row.sectionId,scope.row.sectionName)" type="text" size="mini">编辑</el-button>

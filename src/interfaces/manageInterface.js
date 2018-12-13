@@ -89,6 +89,10 @@ export default {
     setUserGroup(data = {}) {
         let url = `http://${host}/manage/setUserGroup`;
         return post(url, data);
+    },
+    addOrEditUser(data = {}) {
+        let url = `http://${host}/manage/addOrEditUser`;
+        return post(url, data);
     }
 
 };

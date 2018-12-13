@@ -13,7 +13,6 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="search" size="middle" icon="el-icon-search">查询</el-button>
-                        <el-button type="primary" @click="addTeachTask" size="middle" icon="el-icon-circle-plus-outline">新增</el-button>
                     </el-form-item>
                 </el-form>
             </el-header>
@@ -29,38 +28,44 @@
                     </el-table-column>
                     <el-table-column prop="courseName" label="课程名称"></el-table-column>
                     <el-table-column prop="courseType" label="课程类型" :formatter="formatCourseType"></el-table-column>
-                    <el-table-column label="课程节次">
-                        <template slot-scope="scope">
-                            <el-button @click="editCourseSection(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="课程资料">
-                        <template slot-scope="scope">
-                            <el-button @click="editCourseResource(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
-                        </template>
-                    </el-table-column>
                     <el-table-column prop="startDate" label="开始日期" width="100"></el-table-column>
                     <el-table-column prop="endDate" label="结束日期" width="100"></el-table-column>
-                    <el-table-column fixed="right" label="操作">
+                    <el-table-column label="课程人员">
                         <template slot-scope="scope">
-                            <el-button @click="edit(scope.row.taskId,scope.row.taskName,scope.row.courseId,scope.row.startDate,scope.row.endDate,scope.row.remark)" type="text" size="small">课程计划信息</el-button>
-                            <el-button @click="deleteTask(scope.row.taskId)" type="text" size="small">删除</el-button>
+                            <el-button @click="editCoursePerson(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="课程公告">
+                        <template slot-scope="scope">
+                            <el-button @click="editCourseNotice(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="课程问答">
+                        <template slot-scope="scope">
+                            <el-button @click="editCourseInterlocution(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="课程评论">
+                        <template slot-scope="scope">
+                            <el-button @click="editCourseComment(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
             </el-main>
         </el-container>
-        <portal-task-info ref="taskInfo" @refresh-list="search"></portal-task-info>
-        <portal-section-info ref="sectionInfo"></portal-section-info>
-        <portal-curse-resource-info ref="courseResourceInfo"></portal-curse-resource-info>
+        <portal-course-person ref="coursePerson" @refresh-list="search"></portal-course-person>
+        <portal-course-notice ref="courseNotice" @refresh-list="search"></portal-course-notice>
+        <portal-course-interlocution ref="courseInterlocution" @refresh-list="search"></portal-course-interlocution>
+        <portal-course-comment ref="courseComment" @refresh-list="search"></portal-course-comment>
     </div>
 </template>
 <script>
     import CourseInterface from '@/interfaces/courseInterface';
-    import TaskInfo from './taskInfo.vue';
-    import SectionInfo from './courseSection.vue';
-    import CourseResourceInfo from './courseResource/index.vue';
     import {courseTypes} from '../courseManage/options.js';
+    import CoursePerson from './coursePerson/index.vue';
+    import CourseNotice from './courseNotice/index.vue';
+    import CourseInterlocution from './courseInterlocution/index.vue';
+    import CourseComment from './courseComment/index.vue';
 
     export default {
         data() {
@@ -75,9 +80,10 @@
             }
         },
         components: {
-            'portal-task-info':TaskInfo,
-            'portal-section-info':SectionInfo,
-            'portal-curse-resource-info':CourseResourceInfo
+            "portal-course-person":CoursePerson,
+            "portal-course-notice":CourseNotice,
+            "portal-course-interlocution":CourseInterlocution,
+            "portal-course-comment":CourseComment
         },
         mounted(){
             this.search();
@@ -96,35 +102,6 @@
                     }
                 });
             },
-            deleteTask(courseId){
-
-            },
-            addTeachTask(){
-                this.$refs.taskInfo.show=true;
-                this.$refs.taskInfo.title='新增';
-                this.$refs.taskInfo.form={
-                    taskId:'',
-                    taskName:'',
-                    courseId:'',
-                    startTime:'',
-                    endTime:'',
-                    remark:'',
-                };
-                this.$refs.taskInfo.dateRange=[];
-            },
-            edit(taskId,taskName,courseId,startTime,endTime,remark){
-                this.$refs.taskInfo.show=true;
-                this.$refs.taskInfo.title='编辑';
-                this.$refs.taskInfo.form={
-                    taskId:taskId,
-                    taskName:taskName,
-                    courseId:courseId+'',
-                    startTime:startTime,
-                    endTime:endTime,
-                    remark:remark
-                };
-                this.$refs.taskInfo.dateRange=[startTime,endTime];
-            },
             formatCourseType(row, column, val) {
                 let str = '';
                 this.courseTypes.forEach((option) => {
@@ -134,16 +111,24 @@
                 });
                 return str;
             },
-            editCourseSection(taskId){
-                this.$refs.sectionInfo.taskId=taskId;
-                this.$refs.sectionInfo.show=true;
-            },
-            editCourseResource(taskId){
-                this.$refs.courseResourceInfo.taskId=taskId;
-                this.$refs.courseResourceInfo.show=true;
-            },
             getImgSrc(coverImgAcc){
                 return CourseInterface.coverImgUrl(coverImgAcc);
+            },
+            editCoursePerson(taskId){
+                this.$refs.coursePerson.taskId=taskId;
+                this.$refs.coursePerson.show=true;
+            },
+            editCourseNotice(taskId){
+                this.$refs.courseNotice.taskId=taskId;
+                this.$refs.courseNotice.show=true;
+            },
+            editCourseInterlocution(taskId){
+                this.$refs.courseInterlocution.form.taskId=taskId;
+                this.$refs.courseInterlocution.show=true;
+            },
+            editCourseComment(taskId){
+                this.$refs.courseComment.taskId=taskId;
+                this.$refs.courseComment.show=true;
             }
         }
     }

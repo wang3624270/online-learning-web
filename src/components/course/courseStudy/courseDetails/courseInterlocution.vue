@@ -1,100 +1,83 @@
 <template>
     <div>
-        <el-form  :model="form" label-width="100px">
-            <el-form-item label="课程名称:">
-                {{form.courseName}}
-            </el-form-item>
-            <el-form-item label="课程英文名称">
-                {{form.courseEngName}}
-            </el-form-item>
-            <el-form-item label="课程类型">
-                {{form.courseTypeStr}}
-            </el-form-item>
-            <el-form-item label="开课学院">
-                {{form.collegeName}}
-            </el-form-item>
-            <el-form-item label="课程教师">
-                {{form.teachGroup}}
-            </el-form-item>
-            <el-form-item label="指定书目">
-                {{form.book}}
-            </el-form-item>
-            <el-form-item label="课程简介">
-                {{form.briefIntroduction}}
-            </el-form-item>
-            <el-form-item label="参考资料">
-                {{form.reference}}
-            </el-form-item>
-        </el-form>
+        <ul class="tpl-task-list tpl-task-remind" id="commentList"  v-loading="loading">
+            <li>
+                <div>
+                    <button @click="addQuestion" type="button" class="am-btn am-btn-primary" style="background-color: #4db14d;font-size: 15px;">我要提问</button>
+                </div>
+            </li>
+            <!-- 这里是评论列表 -->
+            <li name="comment-li" v-for="item in list" :key="item.questionId">
+                <div class="head-icon">
+                    <span class="tpl-header-list-user-ico">
+                        <img src="@/components/framepage/assets/img/user.png">
+                    </span>
+                </div>
+                <div class="comment-body">
+                    <div class="comment-name">{{item.perName}} </div>
+                    <div class="comment-content">问题标题 : {{item.title}}</div>
+                    <div class="comment-content">问题内容 : {{item.question}}</div>
+                    <div class="comment-time">
+                        <span class="comment-time-1">提问时间 : {{item.createTimeStr}}</span>
+                    </div>
+                    <div class="comment-content" v-if="item.state=='1'">教师回复 : {{item.answer}}</div>
+                    <div class="comment-time" v-if="item.state=='1'">
+                        <span class="comment-time-1">回复时间 : {{item.startDate}}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <portal-interlocution-info ref="interlocutionInfo" @refresh-list="search"></portal-interlocution-info>
     </div>
 </template>
 <script>
     import CourseInterface from '@/interfaces/courseInterface';
-    import ManageInterface from '@/interfaces/manageInterface';
-    import {courseTypes} from '../../courseManage/options.js';
+    import InterlocutionInfo from './interlocutionInfo.vue';
 
     export default {
         data() {
             return {
                 form:{
-                    courseId:this.data.courseId,
-                    courseName:'',
-                    courseEngName:'',
-                    courseType:'',
-                    courseTypeStr:'',
-                    collegeId:'',
-                    collegeName:'',
-                    teachGroup:'',
-                    book:'',
-                    reference:'',
-                    briefIntroduction:''
+                    taskId:parseInt(this.data.taskId),
+                    title:'',
+                    question: ''
                 },
-                courseTypes:courseTypes.slice(1),
-                colleges:[]
+                list:[],
+                loading:false
             };
         },
         mounted(){
-            this.initCourseInfo(this.form.courseId);
+            this.search();
+        },
+        components:{
+            "portal-interlocution-info":InterlocutionInfo,
         },
         props:['data'],
         methods: {
-            initCourseInfo(courseId){
-                let params={courseId:parseInt(courseId)};
-                CourseInterface.getCourseInfo(params).then( (res) => {
+            search(){
+                let params={
+                    taskId:parseInt(this.data.taskId)
+                };
+                CourseInterface.getCourseInterlocutionList(params).then( (res) => {
                     if (res.re == CourseInterface.SUCCESS) {
                         let data=res.data;
-                        this.form=Object.assign(this.form,data.courseInfo);
-                        this.form.collegeId=this.form.collegeId+'';
-                        this.courseTypes.forEach((item)=>{
-                            if(item.value==this.form.courseType){
-                                this.form.courseTypeStr=item.label;
-                            }
-                        });
-                    } else {
-                        this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
-                    }
-                }).then(()=>{
-                    this.initColleges();
-                });
-            },
-            initColleges(){
-                let params={};
-                CourseInterface.getAllCollegeOption(params).then( (res) => {
-                    if (res.re == CourseInterface.SUCCESS) {
-                        let data=res.data;
-                        this.colleges=data.colleges;
-                        this.colleges.forEach((item)=>{
-                            if(item.value==this.form.collegeId){
-                                this.form.collegeName=item.label;
-                            }
-                        });
+                        this.list=data.questionList;
                     } else {
                         this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
                     }
                 });
             },
+            addQuestion(){
+                this.$refs.interlocutionInfo.form={
+                    taskId:this.form.taskId,
+                    title:'',
+                    question:''
+                };
+                this.$refs.interlocutionInfo.show=true;
+            }
         }
     };
 </script>
 <style scoped>
+    @import "../assets/css/studentCourseDetails.css";
 </style>

@@ -2,7 +2,7 @@
     <div>
         <ul id="sectionsList" class="tpl-task-list tpl-task-remind">
             <!-- 这里是课程节次 -->
-            <li style="cursor:pointer;" v-for="item in sectionList" @click="playVideo(item.videoAcc,item.sectionId)" :key="item.sectionId">
+            <li style="cursor:pointer;" v-for="item in sectionList" @click="playVideo(item)" :key="item.sectionId">
                 <div class="cosB">
                     <span class="am-icon-circle-o" style="margin-top: 4px;"></span>
                 </div>
@@ -40,12 +40,13 @@
                     }
                 });
             },
-            playVideo(videoAcc,sectionId){
+            playVideo(item){
                 const {href} = this.$router.resolve({
                     name: 'videoStudy',
                     query: {
-                        accId: videoAcc,
-                        sectionId:sectionId
+                        taskId:item.taskId,
+                        courseId:item.courseId,
+                        sectionId:item.sectionId,
                     }
                 })
                 window.open(href, '_blank');

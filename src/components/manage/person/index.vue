@@ -17,6 +17,11 @@
                     <el-form-item>
                         <el-button type="primary" @click="search" size="middle" icon="el-icon-search">查询</el-button>
                     </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="addUser" size="middle" icon="el-icon-circle-plus-outline">单个添加</el-button>
+                        <el-button type="primary" @click="" size="middle" icon="el-icon-upload2">批量导入</el-button>
+                        <el-button @click="" type="text" size="mini">下载导入模板</el-button>
+                    </el-form-item>
                 </el-form>
             </el-header>
             <el-main>
@@ -30,6 +35,7 @@
                     <el-table-column prop="mobilePhone" label="联系方式"></el-table-column>
                     <el-table-column fixed="right" label="操作">
                         <template slot-scope="scope">
+                            <el-button @click="editInfo(scope.row)" type="text" size="small">编辑</el-button>
                             <el-button @click="edit(scope.row.sysusrid,scope.row.groupid)" type="text" size="small">编辑群组</el-button>
                         </template>
                     </el-table-column>
@@ -37,11 +43,13 @@
             </el-main>
         </el-container>
         <portal-person-info ref="personInfo" @refresh-list="search"></portal-person-info>
+        <portal-user-info ref="userInfo" @refresh-list="search"></portal-user-info>
     </div>
 </template>
 <script>
     import ManageInterface from '@/interfaces/manageInterface';
     import PersonInfo from './personInfo.vue';
+    import UserInfo from './userInfo.vue';
 
     export default {
         data() {
@@ -57,7 +65,8 @@
             }
         },
         components: {
-            'portal-person-info':PersonInfo
+            'portal-person-info':PersonInfo,
+            'portal-user-info':UserInfo
         },
         mounted(){
             this.search();
@@ -99,6 +108,18 @@
                     groupid:groupid
                 };
                 this.$refs.personInfo.groupids=this.groupids;
+            },
+            addUser(){
+                this.$refs.userInfo.form.personId='';
+                this.$refs.userInfo.groupids=this.groupids;
+                this.$refs.userInfo.title='新增';
+                this.$refs.userInfo.show=true;
+            },
+            editInfo(params){
+                this.$refs.userInfo.form=params;
+                this.$refs.userInfo.groupids=this.groupids;
+                this.$refs.userInfo.title='编辑';
+                this.$refs.userInfo.show=true;
             }
         }
     }

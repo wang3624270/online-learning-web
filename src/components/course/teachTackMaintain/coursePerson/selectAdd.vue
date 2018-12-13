@@ -1,15 +1,12 @@
 <template>
     <div>
-        <el-dialog title="课程节次关联资源" :visible.sync="show" width="1000px" v-loading="loading"  append-to-body>
+        <el-dialog title="选择添加" :visible.sync="show" width="800px" v-loading="loading"  append-to-body>
             <el-form :inline="true" :model="form" class="demo-form-inline" size="middle">
-                <el-form-item label="资源名称">
-                    <el-input v-model="form.accName" placeholder="请输入资源名称"></el-input>
+                <el-form-item label="登录名(学号)">
+                    <el-input v-model="form.loginName" placeholder="请输入登录名(学号)"></el-input>
                 </el-form-item>
-                <el-form-item label="资源类型">
-                    <el-input v-model="form.accType" placeholder="请输入资源类型"></el-input>
-                </el-form-item>
-                <el-form-item label="上传者">
-                    <el-input v-model="form.perName" placeholder="请输入上传者"></el-input>
+                <el-form-item label="姓名">
+                    <el-input v-model="form.perName" placeholder="请输入姓名"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="search" size="middle" icon="el-icon-search">查询</el-button>
@@ -17,17 +14,14 @@
             </el-form>
             <div style="height: 10px;"></div>
             <el-table :data="list" border style="width: 100%" size="middle">
-                <el-table-column type="index" label="序号" width="50px"></el-table-column>
-                <el-table-column prop="accName" label="资源名称"></el-table-column>
-                <el-table-column prop="accType" label="类型" width="50px"></el-table-column>
-                <el-table-column prop="uploader" label="上传者" width="80px"></el-table-column>
-                <el-table-column prop="uploadDate" label="上传时间"  width="150px"></el-table-column>
-                <el-table-column label="操作" width="100">
+                <el-table-column type="index" label="序号" width="50"></el-table-column>
+                <el-table-column prop="loginName" label="登录名(学号)"></el-table-column>
+                <el-table-column prop="perName" label="姓名"></el-table-column>
+                <el-table-column prop="mobilePhone" label="联系方式"></el-table-column>
+                <el-table-column prop="perTypeCode" label="学生类型" :formatter="formatPerTypeCode"></el-table-column>
+                <el-table-column label="操作"  width="50px">
                     <template slot-scope="scope">
-                        <el-button @click="relate(scope.row.accId,'VIDEO')" type="text" size="mini">关联视频</el-button>
-                        <!--<el-button @click="relate(scope.row.accId,'AUDIO')" type="text" size="mini">关联音频</el-button>-->
-                        <!--<el-button @click="relate(scope.row.accId,'PPT')" type="text" size="mini">关联课件</el-button>-->
-                        <!--<el-button @click="relate(scope.row.accId,'PRACTICE')" type="text" size="mini">关联在线练习</el-button>-->
+                        <el-button @click="addToTask(scope.row.personId)" type="text" size="mini">添加</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -39,16 +33,17 @@
 </template>
 <script>
     import CourseInterface from '@/interfaces/courseInterface';
+    import {perTypeCodes} from '@/dictionary/manageOptions.js';
 
     export default {
         data() {
             return {
                 form:{
-                    accName:'',
-                    accType:'',
+                    loginName:'',
                     perName:''
                 },
-                sectionId:'',
+                taskId:'',
+                perTypeCodes:perTypeCodes,
                 show: false,
                 list:[],
                 loading:false
@@ -65,11 +60,12 @@
             search(){
                 this.loading=true;
                 let params=this.form;
-                CourseInterface.getResourceList(params).then( (res) => {
+                params.taskId=this.taskId;
+                CourseInterface.getNotMapPersonList(params).then( (res) => {
                     this.loading=false;
                     if (res.re == CourseInterface.SUCCESS) {
                         let data=res.data;
-                        this.list=data.resourceList;
+                        this.list=data.personList;
                     } else {
                         this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
                     }
@@ -78,14 +74,13 @@
             close(){
                 this.show=false;
             },
-            relate(accId,type){
+            addToTask(personId){
                 this.loading=true;
                 let params={
-                    accId:accId,
-                    type:type,
-                    sectionId:this.sectionId
+                    personId:personId,
+                    taskId:this.taskId
                 };
-                CourseInterface.matchSectionAndResource(params).then( (res) => {
+                CourseInterface.addToTask(params).then( (res) => {
                     this.loading=false;
                     if (res.re == CourseInterface.SUCCESS) {
                         this.show = false;
@@ -95,9 +90,19 @@
                         this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
                     }
                 });
-            }
+            },
+            formatPerTypeCode(row, column, val) {
+                let str = '';
+                this.perTypeCodes.forEach((option) => {
+                    if(option.value == val) {
+                        str = option.label;
+                    }
+                });
+                return str;
+            },
         }
     };
 </script>
 <style scoped>
+
 </style>

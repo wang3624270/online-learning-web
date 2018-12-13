@@ -3,7 +3,7 @@
         <el-dialog :title="title" :visible.sync="show" width="800px" :close-on-click-modal="false">
             <el-table :data="applyList" border style="width: 100%" size="middle">
                 <el-table-column type="index" label="序号" width="50px"></el-table-column>
-                <el-table-column prop="perNum" label="用户名"></el-table-column>
+                <el-table-column prop="perNum" label="用户名(学号)"></el-table-column>
                 <el-table-column prop="perName" label="姓名" ></el-table-column>
                 <el-table-column prop="mobilePhone" label="联系方式"></el-table-column>
                 <el-table-column prop="createTimeStr" label="报名时间"></el-table-column>
