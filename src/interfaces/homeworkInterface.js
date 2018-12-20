@@ -2,6 +2,7 @@ import Request from '../kit/Request';
 import UrlConfig from '../kit/urlConfig';
 
 const host = UrlConfig.onlinelearningApiHost;
+const resourceHost = UrlConfig.onlinelearningResourceHost;
 
 function post(url, data) {
     //json序列化时去掉空值属性
@@ -46,57 +47,52 @@ function formPost(url, data) {
 export default {
     SUCCESS: '1',
 
-    getPersonInfo(data = {}) {
-        let url = `http://${host}/manage/getPersonInfo`;
+    getHomeworkList(data = {}) {
+        let url = `http://${host}/homework/getHomeworkList`;
+        return post(url, data);
+    },
+    addOrEditHomework(data = {}) {
+        let url = `http://${host}/homework/addOrEditHomework`;
+        return post(url, data);
+    },
+    getHomeworkSelectList(data = {}) {
+        let url = `http://${host}/homework/getHomeworkSelectList`;
+        return post(url, data);
+    },
+    submitHomeworkScore(data = {}) {
+        let url = `http://${host}/homework/submitHomeworkScore`;
+        return post(url, data);
+    },
+    getPersonHomeworkList(data = {}) {
+        let url = `http://${host}/homework/getPersonHomeworkList`;
         return get(url, data);
     },
-    getMenuList(data = {}) {
-        let url = `http://${host}/manage/getMenuList`;
+    addOrEditHomeworkAnswer(data = {}) {
+        let url = `http://${host}/homework/addOrEditHomeworkAnswer`;
         return post(url, data);
     },
-    deleteMenu(data = {}) {
-        let url = `http://${host}/manage/deleteMenu`;
+    getActivityList(data = {}) {
+        let url = `http://${host}/homework/getActivityList`;
         return post(url, data);
     },
-    addOrEditMenu(data = {}) {
-        let url = `http://${host}/manage/addOrEditMenu`;
+    addOrEditActivity(data = {}) {
+        let url = `http://${host}/homework/addOrEditActivity`;
         return post(url, data);
     },
-    getGroupList(data = {}) {
-        let url = `http://${host}/manage/getGroupList`;
+    getActivitySelectList(data = {}) {
+        let url = `http://${host}/homework/getActivitySelectList`;
+        return post(url, data);
+    },
+    submitScore(data = {}) {
+        let url = `http://${host}/homework/submitScore`;
+        return post(url, data);
+    },
+    getPersonActivityList(data = {}) {
+        let url = `http://${host}/homework/getPersonActivityList`;
         return get(url, data);
-    },
-    deleteGroup(data = {}) {
-        let url = `http://${host}/manage/deleteGroup`;
-        return post(url, data);
-    },
-    addOrEditGroup(data = {}) {
-        let url = `http://${host}/manage/addOrEditGroup`;
-        return post(url, data);
-    },
-    getResListByGroupid(data = {}) {
-        let url = `http://${host}/manage/getResListByGroupid`;
-        return post(url, data);
-    },
-    setGroupFunres(data = {}) {
-        let url = `http://${host}/manage/setGroupFunres`;
-        return post(url, data);
-    },
-    getPersonList(data = {}) {
-        let url = `http://${host}/manage/getPersonList`;
-        return post(url, data);
-    },
-    setUserGroup(data = {}) {
-        let url = `http://${host}/manage/setUserGroup`;
-        return post(url, data);
-    },
-    addOrEditUser(data = {}) {
-        let url = `http://${host}/manage/addOrEditUser`;
-        return post(url, data);
-    },
-    editPersonInfo(data = {}) {
-        let url = `http://${host}/manage/editPersonInfo`;
-        return post(url, data);
     }
+
+
+
 
 };

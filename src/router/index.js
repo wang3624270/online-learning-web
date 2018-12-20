@@ -30,11 +30,18 @@ import QuestionPractice from '@/components/exam/practiceManage/question';
 import UnfinishedExam from '@/components/exam/unfinishedExam';
 import FinishedExam from '@/components/exam/finishedExam';
 import TeachTackMaintain from '@/components/course/teachTackMaintain';
+import HomeworkManage from '@/components/homework/manage';
+import UnfinishedHomework from '@/components/homework/unfinished';
+import ActivityManage from '@/components/homework/activityManage';
+import ActivityPreview from '@/components/homework/activityPreview';
+import LectureLive from '@/components/lecture/live';
+import LiveStudy from '@/components/livePlayer/liveStudy';
 
 Vue.use(Router);
 //懒加载
 const Framepage = resolve => require(['@/components/framepage'], resolve);
 const Studypage = resolve => require(['@/components/player'], resolve);
+const Livepage = resolve => require(['@/components/livePlayer'], resolve);
 
 export default new Router({
     mode: 'history',
@@ -187,18 +194,53 @@ export default new Router({
                     path: '/index/course/teachTackMaintain',
                     name: 'teachTackMaintain',
                     component: TeachTackMaintain
+                },
+                {
+                    path: '/index/homework/homeworkManage',
+                    name: 'homeworkManage',
+                    component: HomeworkManage
+                },
+                {
+                    path: '/index/homework/unfinished',
+                    name: 'unfinishedHomework',
+                    component: UnfinishedHomework
+                },
+                {
+                    path: '/index/homework/activityManage',
+                    name: 'activityManage',
+                    component: ActivityManage
+                },
+                {
+                    path: '/index/homework/activityPreview',
+                    name: 'activityPreview',
+                    component: ActivityPreview
+                },
+                {
+                    path: '/index/lecture/live',
+                    name: 'lectureLive',
+                    component: LectureLive
                 }
             ]
         },
         {
             path: '/study',
-            name: 'studypage',
             component: Studypage,
             children: [
                 {
                     path: '/study/videoStudy',
                     name: 'videoStudy',
                     component: VideoStudy
+                },
+            ]
+        },
+        {
+            path: '/leture',
+            component: Livepage,
+            children: [
+                {
+                    path: '/study/liveStudy',
+                    name: 'liveStudy',
+                    component: LiveStudy
                 },
             ]
         },

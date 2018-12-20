@@ -51,7 +51,7 @@
         watch: {
             show(val) {
                 if(val==true){
-                    if(this.form.practiceId==null || this.form.practiceId==''){
+                    if(this.form.examId!=null && this.form.examId!=''){
                         this.search();
                     }
                 }

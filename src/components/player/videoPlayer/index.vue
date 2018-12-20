@@ -21,6 +21,7 @@
                        @ready="playerReadied">
         </video-player>
         <div class="video-footer"></div>
+        <!--<el-button @click="onPlayerEnded" >开始考试</el-button>-->
         <div>
             <div class="right">
                 <div class="am-u-md-6 am-u-sm-12 row-mb self-style-r">
@@ -55,6 +56,7 @@
                 </div>
             </div>
         </div>
+        <portal-start-practice ref="startPractice"></portal-start-practice>
     </div>
 </template>
 <script>
@@ -64,6 +66,7 @@
     import { videoPlayer } from 'vue-video-player';
     import CourseInterlocution from '@/components/course/courseStudy/courseDetails/courseInterlocution.vue';
     import CourseComment from '@/components/course/courseStudy/courseDetails/courseComment.vue';
+    import StartPractice from '../startPractice/index.vue';
 
     export default {
         data() {
@@ -72,6 +75,8 @@
                     taskId:'',
                     courseId:''
                 },
+                practiceId:this.$route.query.practiceId,
+                sectionName:this.$route.query.sectionName,
                 playerOptions: {
                     // videojs options
                     autoplay: true,
@@ -99,12 +104,15 @@
                 activeTab: '',
                 courseInterlocution:false,
                 courseComment: false,
+                myInterval:'',
+                practiceFinish:'0'
             };
         },
         components: {
             videoPlayer,
             'portal-course-interlocution':CourseInterlocution,
-            'portal-course-comment':CourseComment
+            'portal-course-comment':CourseComment,
+            'portal-start-practice':StartPractice
         },
         watch: {
             activeTab(val) {
@@ -128,7 +136,8 @@
             this.form.courseId = this.$route.query.courseId || null;
         },
         mounted() {
-            console.log('this is current player instance object', this.player)
+            //console.log('this is current player instance object', this.player)
+            this.playRecord();
         },
         computed: {
             player() {
@@ -166,13 +175,33 @@
             onPlayerPlay(player) {
                 // console.log('player play!', player)
                 this.loading=false;
+                //记录播放时长、播放点
+                this.myInterval = setInterval(this.playRecord, 60000);
             },
             onPlayerPause(player) {
                 //console.log('player pause!', player)
+                clearInterval(this.myInterval);
             },
             // ...player event
             onPlayerEnded(player) {
-                // console.log('player pause!', player)
+                if(this.practiceFinish=='0'){
+                    this.$refs.startPractice.form.practiceId=parseInt(this.practiceId);
+                    this.$refs.startPractice.title=this.sectionName+' 在线练习';
+                    this.$refs.startPractice.show=true;
+                }else {
+                    this.$confirm('是否继续学习下一节?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        this.nextSection();
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消'
+                        });
+                    });
+                }
             },
             onPlayerWaiting(player) {
                 // console.log('player pause!', player)
@@ -196,12 +225,45 @@
             playerStateChanged(playerCurrentState) {
                 // console.log('player current update state', playerCurrentState)
             },
-
             // player is ready
             playerReadied(player) {
                 //console.log('the player is readied', player)
                 // you can use it to do something...
                 // player.[methods]
+            },
+            playRecord(){
+                let params={
+                    taskId:parseInt(this.$route.query.taskId) || null,
+                    courseId:parseInt(this.$route.query.courseId) || null,
+                    sectionId:parseInt(this.$route.query.sectionId) || null,
+                };
+                CourseInterface.videoPlayRecord(params).then( (res) => {
+                    if (res.re == CourseInterface.SUCCESS) {
+                        let data=res.data;
+                        this.practiceFinish=data.practiceFinish;
+                    }
+                });
+            },
+            nextSection(){
+                this.loading=true;
+                let params={
+                    taskId:parseInt(this.$route.query.taskId) || null,
+                    courseId:parseInt(this.$route.query.courseId) || null,
+                    sectionId:parseInt(this.$route.query.sectionId) || null
+                };
+                CourseInterface.getNextSection(params).then( (res) => {
+                    this.loading=false;
+                    if (res.re == CourseInterface.SUCCESS) {
+                        let data=res.data;
+                        this.$router.push({
+                            name: 'videoStudy',
+                            query: data
+                        });
+                        this.$router.go(0);
+                    } else {
+                        this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
+                    }
+                });
             }
         }
     };
@@ -227,8 +289,5 @@
         padding-left: 0px;
         margin-top: 18px;
         width: 100%;
-    }
-    .td-font-size{
-        font-size: 12px;
     }
 </style>

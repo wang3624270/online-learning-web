@@ -2,11 +2,11 @@
     <div>
         <div class="tpl-content-scope">
             <div class="note note-info">
-                <h3><span id="courseName">课程名称</span>
+                <h3><span id="courseName">{{taskName}}</span>
                     <span class="close" data-close="note"></span>
                 </h3>
-                <p>课程介绍</p>
-                <p><span class="label label-danger" id="course-title">课程公告</span><span id="course-news">（一）人员管理，人员管理主要分为了用户查询，用户添加、删除，以及用户角色的维护等。点击左侧“人员管理”菜单之后，将显示如图1.3所示操作界面，用户可以选择按用户名查询或者按角色查询，也可以查询全部用户。</span></p>
+                <p>{{briefIntroduction}}</p>
+                <p><span class="label label-danger" id="course-title">{{news.title}}</span><span id="course-news"> [{{news.createTimeStr}}]{{news.content}}</span></p>
             </div>
         </div>
         <div>
@@ -23,6 +23,7 @@
     </div>
 </template>
 <script>
+    import CourseInterface from '@/interfaces/courseInterface';
     import CourseIntroduce from './courseDetails/courseIntroduce.vue';
     import CourseSection from './courseDetails/courseSection.vue';
     import CourseInterlocution from './courseDetails/courseInterlocution.vue';
@@ -34,6 +35,13 @@
                 form:{
                     taskId:'',
                     courseId:''
+                },
+                taskName:'',
+                briefIntroduction:'',
+                news:{
+                    content:'',
+                    title:'',
+                    createTimeStr:''
                 },
                 tabs: [
                     { label: '课程介绍', value: 'COURSE-INTRODUCE' },
@@ -78,11 +86,14 @@
             }
         },
         created(){
-            this.activeTab = 'COURSE-INTRODUCE';
+            this.activeTab = 'COURSE-SECTION';
         },
         beforeMount(){
-            this.form.taskId = this.$route.query.taskId || null;
+            this.form.taskId = parseInt(this.$route.query.taskId) || null;
             this.form.courseId = this.$route.query.courseId || null;
+        },
+        mounted(){
+            this.search();
         },
         components:{
             'portal-course-introduce':CourseIntroduce,
@@ -91,7 +102,21 @@
             'portal-course-comment':CourseComment
         },
         methods:{
-
+            search(){
+                this.loading=true;
+                let params=this.form;
+                CourseInterface.getTaskInfo(params).then( (res) => {
+                    this.loading=false;
+                    if (res.re == CourseInterface.SUCCESS) {
+                        let data=res.data;
+                        this.news=data.news;
+                        this.taskName=data.taskName;
+                        this.briefIntroduction=data.briefIntroduction;
+                    } else {
+                        this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
+                    }
+                });
+            },
         }
     }
 </script>

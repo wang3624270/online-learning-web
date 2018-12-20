@@ -3,7 +3,7 @@
         <header class="am-topbar am-topbar-inverse admin-header">
             <div class="am-topbar-brand">
                 <i class="el-icon-back return-btn" @click="returnBack"></i>
-                <span class="title-style">{{sectionName}}</span>
+                <span class="title-style">{{theme}} </span><span class="am-badge tpl-badge-success am-round">直播</span>
             </div>
             <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
                 <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
@@ -132,7 +132,7 @@
     export default {
         data () {
             return {
-                sectionName:'',
+                theme:'',
                 perName:'',
                 groupName:'',
                 loading:false
@@ -143,7 +143,7 @@
             this.initPersonInfo();
         },
         beforeMount(){
-            this.sectionName = this.$route.query.sectionName;
+            this.theme = this.$route.query.theme;
         },
         mounted(){
             iscroll(window, document, Math);
@@ -171,11 +171,7 @@
             },
             returnBack(){
                 this.$router.push({
-                    name: 'courseDetail',
-                    query: {
-                        taskId: this.$route.query.taskId,
-                        courseId: this.$route.query.courseId
-                    }
+                    name: 'lectureLive'
                 });
             }
         }

@@ -113,8 +113,8 @@
                             <span class="tpl-header-list-user-nick">{{perName}}</span><span class="tpl-header-list-user-ico"> <img src="./assets/img/user.png"></span>
                         </a>
                         <ul class="am-dropdown-content">
-                            <li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
-                            <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+                            <li><a href="#" @click="editInfo"><span class="am-icon-bell-o"></span> 个人资料</a></li>
+                            <li><a href="#"><span class="am-icon-cog"></span> 个人设置</a></li>
                             <li><a href="#" @click="logout"><span class="am-icon-power-off"></span> 退出</a></li>
                         </ul>
                     </li>
@@ -154,14 +154,13 @@
                     </ul>
                 </div>
             </div>
-
             <div class="tpl-content-wrapper">
                 <div class="tpl-portlet-components" style="min-height: 600px;">
                     <router-view></router-view>
                 </div>
             </div>
-
         </div>
+        <portal-person-info ref="personInfo" @refresh-list="initPersonInfo"></portal-person-info>
     </div>
 </template>
 <script>
@@ -175,6 +174,7 @@
     import AmazeUI  from 'amazeui';
     import LoginInterface from '@/interfaces/loginInterface';
     import ManageInterface from '@/interfaces/manageInterface';
+    import PersonInfo from './personInfo/index.vue';
 
     export default {
         data () {
@@ -185,8 +185,12 @@
                 clearHighlightItem:null,
                 lastIndex1:null,
                 lastIndex2:null,
-                loading:false
+                loading:false,
+                form:{}
             }
+        },
+        components: {
+            'portal-person-info':PersonInfo
         },
         beforeMount(){
             this.loading=true;
@@ -203,6 +207,7 @@
                         let data=res.data;
                         this.groupName=data.groupName;
                         this.perName=data.perName;
+                        this.form=data;
                     } else {
                         this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
                     }
@@ -260,6 +265,11 @@
                     this.loading=false;
                     window.location.href='/';
                 });
+            },
+            editInfo(){
+                this.$refs.personInfo.form=this.form;
+                this.$refs.personInfo.title='编辑个人资料';
+                this.$refs.personInfo.show=true;
             }
         }
     }

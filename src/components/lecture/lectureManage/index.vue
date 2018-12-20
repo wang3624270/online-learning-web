@@ -40,6 +40,11 @@
                             {{scope.row.startTimeStr}}-{{scope.row.endTimeStr}}
                         </template>
                     </el-table-column>
+                    <el-table-column label="讲座直播">
+                        <template slot-scope="scope">
+                            <el-button @click="editParams(scope.row.lectureId)" type="text" size="small">参数设置</el-button>
+                        </template>
+                    </el-table-column>
                     <el-table-column fixed="right" label="操作">
                         <template slot-scope="scope">
                             <el-button @click="edit(scope.row.lectureId)" type="text" size="small">编辑</el-button>
@@ -51,12 +56,14 @@
         </el-container>
         <portal-lecture-info ref="lectureInfo" @refresh-list="search"></portal-lecture-info>
         <portal-lecture-detail  :data="data" ref="lectureDetail"></portal-lecture-detail>
+        <portal-live-info ref="liveInfo" @refresh-list="search"></portal-live-info>
     </div>
 </template>
 <script>
     import LectureInterface from '@/interfaces/lectureInterface';
     import TimeFormatUtils from '@/kit/timeFormatUtils';
     import LectureInfo from './lectureInfo.vue';
+    import LiveInfo from './liveInfo/index.vue';
     import LectureDetail from '@/components/lecture/lecturePreview/lectureInfo.vue';
     import {lectureTypes} from './options.js';
 
@@ -75,6 +82,7 @@
         },
         components: {
             'portal-lecture-info':LectureInfo,
+            'portal-live-info':LiveInfo,
             'portal-lecture-detail':LectureDetail
         },
         mounted(){
@@ -141,6 +149,10 @@
             detail(params){
                 this.data=params;
                 this.$refs.lectureDetail.show=true;
+            },
+            editParams(lectureId){
+                this.$refs.liveInfo.form.lectureId=lectureId;
+                this.$refs.liveInfo.show=true;
             }
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-dialog title="我要提问" :visible.sync="show" width="600px" v-loading="loading"  append-to-body>
+        <el-dialog title="我要提问" :visible.sync="show" width="600px" v-loading="loading" :close-on-click-modal="false">
             <el-form :inline="true" :model="form" class="demo-form-inline" size="middle" label-width="100px">
                 <el-form-item label="问题标题">
                     <el-input v-model="form.title"  placeholder="请输入问题回复" class="unified_style"></el-input>

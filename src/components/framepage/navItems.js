@@ -37,15 +37,9 @@ export default [
         children:[
             {label:'学期管理',path:'/index/course/term'},
             {label:'课程计划管理',path:'/index/course/teachTackManage'},
-            {label:'课程计划维护',path:'/index/course/teachTackMaintain'}
-        ]
-    },
-    {
-        label:'课程作业',
-        icon:'am-icon-table',
-        children:[
-            {label:'课程作业管理',path:'/index/homework/charging'},
-            {label:'课程作业批改',path:'/index/homework/statistics'}
+            {label:'课程计划维护',path:'/index/course/teachTackMaintain'},
+            {label:'课程作业管理',path:'/index/homework/homeworkManage'},
+            {label:'课程实践管理',path:'/index/homework/activityManage'},
         ]
     },
     {
@@ -55,15 +49,6 @@ export default [
             {label:'在线考试',path:'/index/exam/examManage'},
             {label:'在线练习',path:'/index/exam/practiceManage'},
             {label:'题库管理',path:'/index/exam/questionManage'},
-        ]
-    },
-    {
-        label:'课程实践',
-        icon:'am-icon-table',
-        children:[
-            {label:'课程实践管理',path:'/index/lecture/charging'},
-            {label:'课程实践报名审核',path:'/index/lecture/statistics'},
-            {label:'课程实践签到管理',path:'/index/lecture/statistics'}
         ]
     },
     {
@@ -104,7 +89,8 @@ export default [
         icon:'am-icon-table',
         children:[
             {label:'课程学习',path:'/index/course/courseStudy'},
-            {label:'课程作业',path:''},
+            {label:'课程作业',path:'/index/homework/unfinished'},
+            {label:'课程实践',path:'/index/homework/activityPreview'},
             {label:'已完成课程',path:''}
         ]
     },
@@ -121,6 +107,7 @@ export default [
         icon:'am-icon-table',
         children:[
             {label:'已报名讲座研讨',path:'/index/lecture/entried'},
+            {label:'讲座直播',path:'/index/lecture/live'},
             {label:'已完成讲座研讨',path:'/index/lecture/finish'},
         ]
     },

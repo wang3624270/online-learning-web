@@ -11,9 +11,9 @@
                 <div class='tpl-i-font' style='height:42px;'>{{data.briefIntroduction}}</div>
                 <div class='tpl-i-more'>
                     <ul>
-                        <li><span class='am-text-warning'>已学0%</span></li>
-                        <li><span class='am-text-success tpl-1-font'>用时36小时23分</span></li>
-                        <li><span class='font-green tpl-1-font'>学习至1-1 课程介绍</span></li>
+                        <li><span class='am-text-warning'>已学{{this.getDegree(data.completeDegree)}}%</span></li>
+                        <li><span class='am-text-success tpl-1-font'>用时{{this.getTime(data.time)}}</span></li>
+                        <li><span class='font-green tpl-1-font'>学至第{{data.sectionIdNode}}节</span></li>
                     </ul>
                 </div>
                 <div class='am-btn-toolbar'>
@@ -51,6 +51,12 @@
                     }
                 })
                 window.open(href, '_blank');
+            },
+            getDegree(val){
+                return (val*100).toFixed(2);
+            },
+            getTime(val){
+                return Math.floor(val/60)+'时'+val%60+'分';
             }
         }
     };

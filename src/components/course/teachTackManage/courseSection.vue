@@ -7,9 +7,10 @@
                 <el-table-column prop="orderNum" label="次序" width="50px"></el-table-column>
                 <el-table-column prop="sectionName" label="节次名称"></el-table-column>
                 <el-table-column prop="courseName" label="视频" width="120px">
-                    <template slot-scope="scope" v-if="scope.row.videoAcc">
-                        <el-button @click="preview(scope.row.videoAcc)" type="text" size="mini">预览</el-button>
-                        <el-button @click="cancel(scope.row.videoId)" type="text" size="mini">取消关联</el-button>
+                    <template slot-scope="scope" >
+                        <el-button @click="preview(scope.row.videoAcc)" type="text" size="mini" v-if="scope.row.videoAcc">预览</el-button>
+                        <el-button @click="cancel(scope.row.videoId)" type="text" size="mini" v-if="scope.row.videoAcc">取消关联</el-button>
+                        <el-button @click="relation(scope.row.sectionId)" type="text" size="mini" v-else>关联</el-button>
                     </template>
                 </el-table-column>
                 <!--<el-table-column prop="courseName" label="音频" width="80px">-->
@@ -24,11 +25,16 @@
                         <!--<el-button @click="cancel(scope.row.pptId)" type="text" size="mini">取消关联</el-button>-->
                     <!--</template>-->
                 <!--</el-table-column>-->
-                <el-table-column prop="courseName" label="在线练习" width="120px"></el-table-column>
+                <el-table-column prop="courseName" label="在线练习" width="120px">
+                    <template slot-scope="scope" >
+                        <el-button @click="previewPractice(scope.row.videoAcc)" type="text" size="mini" v-if="scope.row.practiceId">预览</el-button>
+                        <el-button @click="cancel(scope.row.videoId)" type="text" size="mini" v-if="scope.row.practiceId">取消关联</el-button>
+                        <el-button @click="relationPractice(scope.row.sectionId)" type="text" size="mini" v-else>关联</el-button>
+                    </template>
+                </el-table-column>
                 <el-table-column label="操作"  width="240px">
                     <template slot-scope="scope">
                         <el-button @click="edit(scope.row.sectionId,scope.row.sectionName)" type="text" size="mini">编辑</el-button>
-                        <el-button @click="relation(scope.row.sectionId)" type="text" size="mini">关联资源</el-button>
                         <el-button @click="adjust(scope.row.sectionId,'up')" size="mini" circle icon="el-icon-arrow-up" type="primary"></el-button>
                         <el-button @click="adjust(scope.row.sectionId,'down')" size="mini" circle icon="el-icon-arrow-down" type="primary"></el-button>
                         <el-button @click="deleteSection(scope.row.sectionId)" type="text" size="mini">删除</el-button>
@@ -40,13 +46,15 @@
             </div>
             <portal-section-info ref="sectionInfo" @refresh-list="initSectionInfo"></portal-section-info>
             <portal-relation-resource ref="relationResource" @refresh-list="initSectionInfo"></portal-relation-resource>
+            <portal-relation-practice ref="relationPractice" @refresh-list="initSectionInfo"></portal-relation-practice>
         </el-dialog>
     </div>
 </template>
 <script>
     import CourseInterface from '@/interfaces/courseInterface';
     import SectionInfo from './sectionInfo.vue';
-    import RelationResource from './relationResource.vue';
+    import RelationResource from './sectionRelation/relationResource.vue';
+    import RelationPractice from './sectionRelation/relationPractice.vue';
 
     export default {
         data() {
@@ -66,7 +74,8 @@
         },
         components:{
             "portal-section-info":SectionInfo,
-            "portal-relation-resource":RelationResource
+            "portal-relation-resource":RelationResource,
+            "portal-relation-practice":RelationPractice
         },
         methods: {
             initSectionInfo(){
@@ -125,7 +134,14 @@
                 this.$refs.relationResource.show=true;
                 this.$refs.relationResource.sectionId=sectionId;
             },
+            relationPractice(sectionId){
+                this.$refs.relationPractice.show=true;
+                this.$refs.relationPractice.sectionId=sectionId;
+            },
             preview(){
+
+            },
+            previewPractice(){
 
             },
             cancel(id){

@@ -139,6 +139,10 @@ export default {
         let url = `http://${host}/exam/calculateScore`;
         return post(url, data);
     },
+    submitPractice(data = {}) {
+        let url = `http://${host}/exam/submitPractice`;
+        return post(url, data);
+    }
 
 
 };

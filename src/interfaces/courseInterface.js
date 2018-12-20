@@ -222,6 +222,22 @@ export default {
     submitInterlocutionQuestion(data = {}) {
         let url = `http://${host}/course/submitInterlocutionQuestion`;
         return post(url, data);
+    },
+    matchSectionAndPractice(data = {}) {
+        let url = `http://${host}/course/matchSectionAndPractice`;
+        return post(url, data);
+    },
+    videoPlayRecord(data = {}) {
+        let url = `http://${host}/course/videoPlayRecord`;
+        return post(url, data);
+    },
+    getNextSection(data = {}) {
+        let url = `http://${host}/course/getNextSection`;
+        return post(url, data);
+    },
+    getTaskInfo(data = {}) {
+        let url = `http://${host}/course/getTaskInfo`;
+        return post(url, data);
     }
 
 

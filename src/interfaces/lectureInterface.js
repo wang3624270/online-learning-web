@@ -95,5 +95,13 @@ export default {
         let url = `http://${host}/lecture/hasAttendance`;
         return post(url, data);
     },
+    getLectureLiveInfo(data = {}) {
+        let url = `http://${host}/lecture/getLectureLiveInfo`;
+        return post(url, data);
+    },
+    submitLiveInfo(data = {}) {
+        let url = `http://${host}/lecture/submitLiveInfo`;
+        return post(url, data);
+    },
 
 };
