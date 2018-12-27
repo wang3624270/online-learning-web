@@ -16,3 +16,8 @@
 .el-pagination {
      text-align: right;
  }
+.content-hide{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+}

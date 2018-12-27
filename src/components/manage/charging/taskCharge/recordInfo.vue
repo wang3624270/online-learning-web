@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-dialog title="选课人员列表" :visible.sync="show" width="800px" v-loading="loading"  :close-on-click-modal="false">
+        <el-dialog title="付费记录" :visible.sync="show" width="1000px" v-loading="loading"  :close-on-click-modal="false">
             <el-form :inline="true" :model="form" class="demo-form-inline" size="middle">
                 <el-form-item label="登录名(学号)">
                     <el-input v-model="form.loginName" placeholder="请输入登录名(学号)"></el-input>
@@ -17,30 +17,37 @@
                 <el-table-column type="index" label="序号" width="50"></el-table-column>
                 <el-table-column prop="loginName" label="登录名(学号)"></el-table-column>
                 <el-table-column prop="perName" label="姓名"></el-table-column>
-                <el-table-column label="分数"  fixed="right">
+                <el-table-column prop="mobilePhone" label="联系方式"></el-table-column>
+                <el-table-column prop="perTypeCode" label="学生类型" :formatter="formatPerTypeCode"></el-table-column>
+                <el-table-column prop="payNumber" label="流水号"></el-table-column>
+                <el-table-column prop="amount" label="支付金额" width="80">
                     <template slot-scope="scope">
-                        <el-input v-model="scope.row.grade" placeholder="请输入分数" style="width: 120px"></el-input>
+                        <span>{{scope.row.amount}}元</span>
                     </template>
                 </el-table-column>
+                <el-table-column prop="payMode" label="付款方式"></el-table-column>
+                <el-table-column prop="createTimeStr" label="付款时间" width="100"></el-table-column>
             </el-table>
             <div slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="submitScore" >提交</el-button>
+                <el-button type="primary" @click="close" >关闭</el-button>
             </div>
         </el-dialog>
     </div>
 </template>
 <script>
-    import HomeworkInterface from '@/interfaces/homeworkInterface';
+    import ManageInterface from '@/interfaces/manageInterface';
+    import {perTypeCodes} from '@/dictionary/manageOptions.js';
 
     export default {
         data() {
             return {
                 form:{
-                    taskId:'',
-                    homeworkId:'',
                     loginName:'',
-                    perName:''
+                    perName:'',
+                    state:''
                 },
+                taskId:'',
+                perTypeCodes:perTypeCodes,
                 show: false,
                 list:[],
                 loading:false
@@ -57,37 +64,32 @@
             search(){
                 this.loading=true;
                 let params=this.form;
-                HomeworkInterface.getActivitySelectList(params).then( (res) => {
+                params.taskId=this.taskId;
+                ManageInterface.getCourseChargeList(params).then( (res) => {
                     this.loading=false;
-                    if (res.re == HomeworkInterface.SUCCESS) {
+                    if (res.re == ManageInterface.SUCCESS) {
                         let data=res.data;
-                        this.list=data.selectList;
+                        this.list=data.personList;
                     } else {
                         this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
                     }
                 });
             },
-            submitScore(){
-                this.loading=true;
-                let params={
-                    selectList:this.list
-                };
-                params.selectList.forEach((item)=>{
-                   item.grade=parseInt(item.grade);
-                });
-                HomeworkInterface.submitScore(params).then( (res) => {
-                    this.loading=false;
-                    if (res.re == HomeworkInterface.SUCCESS) {
-                        this.show = false;
-                        this.$message.success('操作成功！😊');
-                        this.$emit('refresh-list');
-                    } else {
-                        this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
+            close(){
+                this.show=false;
+            },
+            formatPerTypeCode(row, column, val) {
+                let str = '';
+                this.perTypeCodes.forEach((option) => {
+                    if(option.value == val) {
+                        str = option.label;
                     }
                 });
+                return str;
             }
         }
     };
 </script>
 <style scoped>
+
 </style>

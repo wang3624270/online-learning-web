@@ -3,7 +3,7 @@
         <el-dialog :title="title" :visible.sync="show" width="800px">
             <el-form :inline="true" :model="form" class="demo-form-inline" label-width="100px">
                 <el-form-item label="课程计划名称">
-                    <el-input v-model="form.taskName" class="width-unified"  placeholder="请输入课程名称"></el-input>
+                    <el-input v-model="form.taskName" class="width-unified"  placeholder="请输入课程计划名称"></el-input>
                 </el-form-item>
                 <el-form-item label="课程">
                     <el-select v-model="form.courseId" placeholder="请选择课程" class="width-unified">
@@ -22,8 +22,13 @@
                         :editable="false">
                     </el-date-picker>
                 </el-form-item>
+                <el-form-item label="课程费用">
+                    <el-input v-model="form.price"  placeholder="请输入" style="width:150px;">
+                        <template slot="append">元</template>
+                    </el-input>
+                </el-form-item>
                 <el-form-item label="备注">
-                    <el-input type="textarea" v-model="form.remark"  placeholder="请输入参考资料" style="width:350px;"></el-input>
+                    <el-input type="textarea" v-model="form.remark"  placeholder="请输入备注" style="width:350px;"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -44,6 +49,7 @@
                     courseId:'',
                     startTime:'',
                     endTime:'',
+                    price:'',
                     remark:'',
                 },
                 courses:[],

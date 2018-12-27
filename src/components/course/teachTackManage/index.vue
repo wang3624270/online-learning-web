@@ -43,7 +43,7 @@
                     <el-table-column prop="endDate" label="结束日期" width="100"></el-table-column>
                     <el-table-column fixed="right" label="操作">
                         <template slot-scope="scope">
-                            <el-button @click="edit(scope.row.taskId,scope.row.taskName,scope.row.courseId,scope.row.startDate,scope.row.endDate,scope.row.remark)" type="text" size="small">课程计划信息</el-button>
+                            <el-button @click="edit(scope.row.taskId,scope.row.taskName,scope.row.courseId,scope.row.startDate,scope.row.endDate,scope.row.price,scope.row.remark)" type="text" size="small">课程计划信息</el-button>
                             <el-button @click="deleteTask(scope.row.taskId)" type="text" size="small">删除</el-button>
                         </template>
                     </el-table-column>
@@ -108,11 +108,12 @@
                     courseId:'',
                     startTime:'',
                     endTime:'',
+                    price:'',
                     remark:'',
                 };
                 this.$refs.taskInfo.dateRange=[];
             },
-            edit(taskId,taskName,courseId,startTime,endTime,remark){
+            edit(taskId,taskName,courseId,startTime,endTime,price,remark){
                 this.$refs.taskInfo.show=true;
                 this.$refs.taskInfo.title='编辑';
                 this.$refs.taskInfo.form={
@@ -121,6 +122,7 @@
                     courseId:courseId+'',
                     startTime:startTime,
                     endTime:endTime,
+                    price:price,
                     remark:remark
                 };
                 this.$refs.taskInfo.dateRange=[startTime,endTime];

@@ -24,6 +24,11 @@
                 <el-form-item label="指定书目">
                     <el-input v-model="form.book" class="width-unified"  placeholder="请输入指定书目"></el-input>
                 </el-form-item>
+                <el-form-item label="学科类别">
+                    <el-select v-model="form.subject" placeholder="请选择学科类别" class="width-unified">
+                        <el-option v-for="item in subjects" :label="item.label" :value="item.value" :key="item.value"></el-option>
+                    </el-select>
+                </el-form-item>
                 <el-form-item label="课程简介">
                     <el-input type="textarea" v-model="form.briefIntroduction"  placeholder="请输入课程简介"  class="width-unified"></el-input>
                 </el-form-item>
@@ -55,6 +60,7 @@
     import ManageInterface from '@/interfaces/manageInterface';
     import {courseTypes} from './options.js';
     import "./style.css"
+    import  {subjects} from '@/dictionary/courseOptions'
 
     export default {
         data() {
@@ -67,11 +73,13 @@
                     collegeId:'',
                     teachGroup:'',
                     book:'',
+                    subject:'',
                     reference:'',
                     briefIntroduction:'',
                     coverImgAcc:''
                 },
                 personId:'',
+                subjects:subjects,
                 courseTypes:courseTypes.slice(1),
                 colleges:[],
                 title:'',

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-dialog title="课程人员" :visible.sync="show" width="800px" v-loading="loading"  :close-on-click-modal="false">
+        <el-dialog title="课程人员" :visible.sync="show" width="1000px" v-loading="loading"  :close-on-click-modal="false">
             <el-form :inline="true" :model="form" class="demo-form-inline" size="middle">
                 <el-form-item label="登录名(学号)">
                     <el-input v-model="form.loginName" placeholder="请输入登录名(学号)"></el-input>
@@ -15,6 +15,8 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="search" size="middle" icon="el-icon-search">查询</el-button>
+                </el-form-item>
+                <el-form-item>
                     <el-button type="primary" @click="selectAdd" size="middle" icon="el-icon-circle-plus-outline">选择添加</el-button>
                     <el-button type="primary" @click="search" size="middle" icon="el-icon-upload2">批量导入</el-button>
                     <el-button @click="" type="text" size="mini">下载导入模板</el-button>
@@ -28,6 +30,7 @@
                 <el-table-column prop="mobilePhone" label="联系方式"></el-table-column>
                 <el-table-column prop="perTypeCode" label="学生类型" :formatter="formatPerTypeCode"></el-table-column>
                 <el-table-column prop="state" label="关联类型" :formatter="formatMapType"></el-table-column>
+                <el-table-column prop="price" label="课程付费(元)"></el-table-column>
                 <el-table-column label="操作"  width="50px">
                     <template slot-scope="scope">
                         <el-button @click="deletePeople(scope.row.id)" type="text" size="mini">删除</el-button>

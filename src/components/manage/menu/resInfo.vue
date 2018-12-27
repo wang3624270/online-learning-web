@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-dialog :title="title" :visible.sync="show" width="500px">
+        <el-dialog :title="title" :visible.sync="show" width="500px" :close-on-click-modal="false">
             <el-form label-width="90px">
                 <el-form-item label="菜单名称">
                     <el-input v-model="params.name" placeholder="请输入菜单名称">

@@ -97,6 +97,35 @@ export default {
     editPersonInfo(data = {}) {
         let url = `http://${host}/manage/editPersonInfo`;
         return post(url, data);
+    },
+    getPersonalPayList(data = {}) {
+        let url = `http://${host}/manage/getPersonalPayList`;
+        return post(url, data);
+    },
+    editTeachTaskPrice(data = {}) {
+        let url = `http://${host}/manage/editTeachTaskPrice`;
+        return post(url, data);
+    },
+    getCourseChargeList(data = {}) {
+        let url = `http://${host}/manage/getCourseChargeList`;
+        return post(url, data);
+    },
+    getPayRecordList(data = {}) {
+        let url = `http://${host}/manage/getPayRecordList`;
+        return post(url, data);
+    },
+    getNoticeList(data = {}) {
+        let url = `http://${host}/manage/getNoticeList`;
+        return get(url, data);
+    },
+    addOrEditNotice(data = {}) {
+        let url = `http://${host}/manage/addOrEditNotice`;
+        return post(url, data);
+    },
+    deleteNotice(data = {}) {
+        let url = `http://${host}/manage/deleteNotice`;
+        return post(url, data);
     }
+
 
 };

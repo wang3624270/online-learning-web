@@ -2,14 +2,14 @@
     <div class='am-u-sm-12 am-u-md-6 am-u-lg-4' style='float:left;'>
         <div class='tpl-table-images-content'>
             <div class='tpl-table-images-content-i-time'>课程开放时间:<br>{{data.startDate}} - {{data.endDate}}</div>
-            <div class='tpl-i-title'><span class=' tpl-1-font'>讲座报告:{{data.taskName}}</span></div>
+            <div class='tpl-i-title' style='height:20px;'><span class='content-hide tpl-1-font'>讲座报告:{{data.taskName}}</span></div>
             <a href='#' @click="detail()" class='tpl-table-images-content-i'>
                 <img v-if="data.coverImgAcc" :src='getImgSrc(data.coverImgAcc)' alt='封面图片'>
                 <img src='@/components/course/courseStudy/assets/img/default_cover_img.jpg' alt='封面图片' v-else>
             </a>
             <div class='tpl-table-images-content-block'>
                 <div class='tpl-i-font' style='height:42px;'>{{data.briefIntroduction}}</div>
-                <div class='tpl-i-more'>
+                <div class='tpl-i-more content-hide'  style='height:72px;'>
                     <ul>
                         <span class='am-text-success tpl-1-font'>主讲: {{data.teachGroup}}</span><br>
                         <span class='am-text-warning'>开课学院: {{data.collegeName}}</span>
@@ -37,7 +37,8 @@
         data() {
             return {
                 perName:'',
-                mobilePhone:''
+                mobilePhone:'',
+                perTypeCode:''
             };
         },
         components: {
@@ -51,6 +52,7 @@
                     let data=res.data;
                     this.perName=data.perName;
                     this.mobilePhone=data.mobilePhone;
+                    this.perTypeCode=data.perTypeCode;
                 } else {
                     this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
                 }
@@ -68,9 +70,13 @@
                 };
             },
             entry(){
+                let sureInfo='确定';
+                if(this.perTypeCode=='U'){
+                    sureInfo+='支付'+this.data.price+'元';
+                }
                 let info='姓名:'+this.perName+';联系方式:'+this.mobilePhone;
                 this.$confirm(info, '确认报名信息', {
-                    confirmButtonText: '确定',
+                    confirmButtonText:sureInfo,
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {

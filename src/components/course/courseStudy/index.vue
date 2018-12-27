@@ -9,7 +9,7 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item label="课程名称">
-                        <el-input v-model="form.courseName" placeholder="请输入课程名称"></el-input>
+                        <el-input v-model="form.taskName" placeholder="请输入课程名称"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="search" size="middle" icon="el-icon-search">查询</el-button>
@@ -33,7 +33,7 @@
         data() {
             return {
                 form:{
-                    courseName:'',
+                    taskName:'',
                     courseType:''
                 },
                 courseTypes:courseTypes,

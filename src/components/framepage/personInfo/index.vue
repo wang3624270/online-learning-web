@@ -22,8 +22,10 @@
                         <el-option v-for="item in genderCodes" :label="item.label" :value="item.value" :key="item.value"></el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="联系方式" prop="mobilePhone">
-                    <el-input v-model="form.mobilePhone"  placeholder="请输入联系方式" class="unified_style"></el-input>
+                <el-form-item label="手机号" prop="mobilePhone">
+                    <el-input v-model="form.mobilePhone"  placeholder="请输入手机号方式" class="unified_style"  disabled>
+                        <el-button slot="append" icon="el-icon-edit">修改手机号</el-button>
+                    </el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">

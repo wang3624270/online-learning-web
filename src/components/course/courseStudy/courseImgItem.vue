@@ -2,7 +2,7 @@
     <div class='am-u-sm-12 am-u-md-6 am-u-lg-4' style='float:left;'>
         <div class='tpl-table-images-content'>
             <div class='tpl-table-images-content-i-time'>课程结束时间:{{data.endDate}}</div>
-            <div class='tpl-i-title'><span class=' tpl-1-font'>课程名称:{{data.courseName}}</span></div>
+            <div class='tpl-i-title'  style='height:20px;'><span class=' tpl-1-font'>课程名称:{{data.taskName}}</span></div>
             <a href='#' @click="startLearn(data.taskId)" class='tpl-table-images-content-i'>
                 <img v-if="data.coverImgAcc" :src='getImgSrc(data.coverImgAcc)' alt='封面图片'>
                 <img src='./assets/img/default_cover_img.jpg' alt='封面图片' v-else>

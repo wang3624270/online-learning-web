@@ -30,42 +30,19 @@
                     <el-table-column prop="courseType" label="课程类型" :formatter="formatCourseType"></el-table-column>
                     <el-table-column prop="startDate" label="开始日期" width="100"></el-table-column>
                     <el-table-column prop="endDate" label="结束日期" width="100"></el-table-column>
-                    <el-table-column label="课程人员">
+                    <el-table-column label="课程成绩">
                         <template slot-scope="scope">
                             <el-button @click="editCoursePerson(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="课程公告">
-                        <template slot-scope="scope">
-                            <el-button @click="editCourseNotice(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="课程问答">
-                        <template slot-scope="scope">
-                            <el-button @click="editCourseInterlocution(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="课程评论">
-                        <template slot-scope="scope">
-                            <el-button @click="editCourseComment(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
             </el-main>
         </el-container>
-        <portal-course-person ref="coursePerson" @refresh-list="search"></portal-course-person>
-        <portal-course-notice ref="courseNotice" @refresh-list="search"></portal-course-notice>
-        <portal-course-interlocution ref="courseInterlocution" @refresh-list="search"></portal-course-interlocution>
-        <portal-course-comment ref="courseComment" @refresh-list="search"></portal-course-comment>
     </div>
 </template>
 <script>
     import CourseInterface from '@/interfaces/courseInterface';
-    import {courseTypes} from '../courseManage/options.js';
-    import CoursePerson from './coursePerson/index.vue';
-    import CourseNotice from './courseNotice/index.vue';
-    import CourseInterlocution from './courseInterlocution/index.vue';
-    import CourseComment from './courseComment/index.vue';
+    import {courseTypes} from '@/components/course/courseManage/options.js';
 
     export default {
         data() {
@@ -78,12 +55,6 @@
                 courseTypes:courseTypes,
                 loading:false
             }
-        },
-        components: {
-            "portal-course-person":CoursePerson,
-            "portal-course-notice":CourseNotice,
-            "portal-course-interlocution":CourseInterlocution,
-            "portal-course-comment":CourseComment
         },
         mounted(){
             this.search();
@@ -115,20 +86,12 @@
                 return CourseInterface.coverImgUrl(coverImgAcc);
             },
             editCoursePerson(taskId){
-                this.$refs.coursePerson.taskId=taskId;
-                this.$refs.coursePerson.show=true;
-            },
-            editCourseNotice(taskId){
-                this.$refs.courseNotice.taskId=taskId;
-                this.$refs.courseNotice.show=true;
-            },
-            editCourseInterlocution(taskId){
-                this.$refs.courseInterlocution.form.taskId=taskId;
-                this.$refs.courseInterlocution.show=true;
-            },
-            editCourseComment(taskId){
-                this.$refs.courseComment.taskId=taskId;
-                this.$refs.courseComment.show=true;
+                this.$router.push({
+                    path: '/index/statistics/studentScore',
+                    query: {
+                        taskId: taskId
+                    }
+                });
             }
         }
     }

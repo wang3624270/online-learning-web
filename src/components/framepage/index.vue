@@ -17,7 +17,7 @@
                 <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
                     <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                         <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                            <span class="am-icon-bell-o"></span> 提醒 <span class="am-badge tpl-badge-success am-round">5</span>
+                            <span class="am-icon-bell-o"></span> 提醒 <span class="am-badge tpl-badge-success am-round">{{this.getRandom()}}</span>
                         </a>
                         <ul class="am-dropdown-content tpl-dropdown-content">
                             <li class="tpl-dropdown-content-external">
@@ -35,7 +35,7 @@
                     </li>
                     <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                         <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                            <span class="am-icon-comment-o"></span> 消息 <span class="am-badge tpl-badge-danger am-round">9</span>
+                            <span class="am-icon-comment-o"></span> 消息 <span class="am-badge tpl-badge-danger am-round">{{this.getRandom()}}</span>
                         </a>
                         <ul class="am-dropdown-content tpl-dropdown-content">
                             <li class="tpl-dropdown-content-external">
@@ -65,7 +65,7 @@
                     </li>
                     <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                         <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                            <span class="am-icon-calendar"></span> 进度 <span class="am-badge tpl-badge-primary am-round">4</span>
+                            <span class="am-icon-calendar"></span> 进度 <span class="am-badge tpl-badge-primary am-round">{{this.getRandom()}}</span>
                         </a>
                         <ul class="am-dropdown-content tpl-dropdown-content">
                             <li class="tpl-dropdown-content-external">
@@ -126,7 +126,7 @@
 
             <div class="tpl-left-nav tpl-left-nav-hover">
                 <div class="tpl-left-nav-title">
-                    {{groupName}}
+                    {{perType}}
                 </div>
                 <div class="tpl-left-nav-list">
                     <ul class="tpl-left-nav-menu">
@@ -175,6 +175,7 @@
     import LoginInterface from '@/interfaces/loginInterface';
     import ManageInterface from '@/interfaces/manageInterface';
     import PersonInfo from './personInfo/index.vue';
+    import {perTypeCodes} from '@/dictionary/manageOptions'
 
     export default {
         data () {
@@ -185,6 +186,7 @@
                 clearHighlightItem:null,
                 lastIndex1:null,
                 lastIndex2:null,
+                perTypeCodes:perTypeCodes,
                 loading:false,
                 form:{}
             }
@@ -199,6 +201,17 @@
         },
         mounted(){
             iscroll(window, document, Math);
+        },
+        computed:{
+            perType(){
+                let str = '';
+                this.perTypeCodes.forEach((option) => {
+                    if(option.value == this.form.perTypeCode) {
+                        str = option.label;
+                    }
+                });
+                return str;
+            }
         },
         methods:{
             initPersonInfo(){
@@ -270,6 +283,9 @@
                 this.$refs.personInfo.form=this.form;
                 this.$refs.personInfo.title='编辑个人资料';
                 this.$refs.personInfo.show=true;
+            },
+            getRandom(){
+                return (Math.random()*7%10+1).toFixed(0);
             }
         }
     }

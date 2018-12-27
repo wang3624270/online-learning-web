@@ -574,8 +574,9 @@
             </div>
         </footer>
         <!--//footer-->
-        <portal-login-page ref="loginPage" @open-regist="regist"></portal-login-page>
-        <portal-regist-page  ref="registPage"></portal-regist-page>
+        <portal-login-page ref="loginPage" @open-regist="regist" @open-forget="forgetPwd"></portal-login-page>
+        <portal-forget-pwd ref="forgetPwd"></portal-forget-pwd>
+        <portal-regist-page ref="registPage"></portal-regist-page>
     </div>
 </template>
 
@@ -593,12 +594,12 @@
     import {scroll} from "./assets/js/scroll";
     import LoginInterface from '@/interfaces/loginInterface';
     import RegistPage from './regist/index.vue';
+    import ForgetPwd from './forgetPwd/index.vue';
     import LoginPage from './login.vue';
 
     export default {
         data () {
             return {
-                dialogFormVisible: false,
                 form:{
                     loginName:'student',
                     password:'1',
@@ -620,7 +621,8 @@
         },
         components:{
             "portal-regist-page":RegistPage,
-            "portal-login-page":LoginPage
+            "portal-login-page":LoginPage,
+            "portal-forget-pwd":ForgetPwd
         },
         methods:{
             hideURLbar() {
@@ -630,8 +632,10 @@
                 this.$refs.loginPage.show=true;
             },
             regist(){
-                this.dialogFormVisible=false;
                 this.$refs.registPage.show=true;
+            },
+            forgetPwd(){
+                this.$refs.forgetPwd.show=true;
             }
         }
     };

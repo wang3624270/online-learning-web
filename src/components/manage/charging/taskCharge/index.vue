@@ -4,7 +4,7 @@
             <el-header height="auto">
                 <el-form :inline="true" :model="form" class="demo-form-inline" size="middle">
                     <el-form-item label="课程计划名称">
-                        <el-input v-model="form.taskName" placeholder="请输入课程计划名称"></el-input>
+                        <el-input v-model="form.taskName" placeholder="请输入课程名称"></el-input>
                     </el-form-item>
                     <el-form-item label="课程类型">
                         <el-select v-model="form.courseType" placeholder="请选择课程类型">
@@ -30,42 +30,28 @@
                     <el-table-column prop="courseType" label="课程类型" :formatter="formatCourseType"></el-table-column>
                     <el-table-column prop="startDate" label="开始日期" width="100"></el-table-column>
                     <el-table-column prop="endDate" label="结束日期" width="100"></el-table-column>
-                    <el-table-column label="课程人员">
+                    <el-table-column fixed="right" label="课程费用">
                         <template slot-scope="scope">
-                            <el-button @click="editCoursePerson(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
+                            <span>{{scope.row.price}} 元</span>
+                            <el-button @click="edit(scope.row)" type="text" size="small">修改</el-button>
                         </template>
                     </el-table-column>
-                    <el-table-column label="课程公告">
+                    <el-table-column fixed="right" label="付费记录">
                         <template slot-scope="scope">
-                            <el-button @click="editCourseNotice(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="课程问答">
-                        <template slot-scope="scope">
-                            <el-button @click="editCourseInterlocution(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="课程评论">
-                        <template slot-scope="scope">
-                            <el-button @click="editCourseComment(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
+                            <el-button @click="look(scope.row)" type="text" size="small">查看</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
             </el-main>
         </el-container>
-        <portal-course-person ref="coursePerson" @refresh-list="search"></portal-course-person>
-        <portal-course-notice ref="courseNotice" @refresh-list="search"></portal-course-notice>
-        <portal-course-interlocution ref="courseInterlocution" @refresh-list="search"></portal-course-interlocution>
-        <portal-course-comment ref="courseComment" @refresh-list="search"></portal-course-comment>
+        <portal-record-info ref="recordInfo"></portal-record-info>
     </div>
 </template>
 <script>
     import CourseInterface from '@/interfaces/courseInterface';
-    import {courseTypes} from '../courseManage/options.js';
-    import CoursePerson from './coursePerson/index.vue';
-    import CourseNotice from './courseNotice/index.vue';
-    import CourseInterlocution from './courseInterlocution/index.vue';
-    import CourseComment from './courseComment/index.vue';
+    import ManageInterface from '@/interfaces/manageInterface';
+    import {courseTypes} from '@/components/course/courseManage/options.js';
+    import RecordInfo from './recordInfo.vue';
 
     export default {
         data() {
@@ -80,10 +66,7 @@
             }
         },
         components: {
-            "portal-course-person":CoursePerson,
-            "portal-course-notice":CourseNotice,
-            "portal-course-interlocution":CourseInterlocution,
-            "portal-course-comment":CourseComment
+            'portal-record-info':RecordInfo
         },
         mounted(){
             this.search();
@@ -102,6 +85,35 @@
                     }
                 });
             },
+            edit(task){
+                this.$prompt('请输入课程费用(元)', '修改课程费用', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消'
+                }).then(({ value }) => {
+                    this.loading=true;
+                    let params={
+                        chargeId:task.chargeId,
+                        price:value
+                    };
+                    ManageInterface.editTeachTaskPrice(params).then( (res) => {
+                        this.loading=false;
+                        if (res.re == ManageInterface.SUCCESS) {
+                            this.search();
+                        } else {
+                            this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
+                        }
+                    });
+                    this.$message({
+                        type: 'success',
+                        message: '操作成功'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '取消操作'
+                    });
+                });
+            },
             formatCourseType(row, column, val) {
                 let str = '';
                 this.courseTypes.forEach((option) => {
@@ -114,21 +126,9 @@
             getImgSrc(coverImgAcc){
                 return CourseInterface.coverImgUrl(coverImgAcc);
             },
-            editCoursePerson(taskId){
-                this.$refs.coursePerson.taskId=taskId;
-                this.$refs.coursePerson.show=true;
-            },
-            editCourseNotice(taskId){
-                this.$refs.courseNotice.taskId=taskId;
-                this.$refs.courseNotice.show=true;
-            },
-            editCourseInterlocution(taskId){
-                this.$refs.courseInterlocution.form.taskId=taskId;
-                this.$refs.courseInterlocution.show=true;
-            },
-            editCourseComment(taskId){
-                this.$refs.courseComment.taskId=taskId;
-                this.$refs.courseComment.show=true;
+            look(task){
+                this.$refs.recordInfo.taskId=task.taskId;
+                this.$refs.recordInfo.show=true;
             }
         }
     }

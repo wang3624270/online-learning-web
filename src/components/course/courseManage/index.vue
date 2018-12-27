@@ -118,7 +118,8 @@
                     book:'',
                     reference:'',
                     briefIntroduction:'',
-                    coverImgAcc:''
+                    coverImgAcc:'',
+                    subject:''
                 };
             },
             edit(courseId){

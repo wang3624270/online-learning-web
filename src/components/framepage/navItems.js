@@ -1,7 +1,7 @@
 export default [
     {
         label:'用户权限',
-        icon:'am-icon-table',
+        icon:'am-icon-user',
         children:[
             {label:'人员管理',path:'/index/manage/person'},
             {label:'群组管理',path:'/index/manage/group'},
@@ -9,23 +9,24 @@ export default [
         ]
     },
     {
-        label:'课程收费',
-        icon:'am-icon-table',
+        label:'计费管理',
+        icon:'am-icon-calculator',
         children:[
-            {label:'计费管理',path:'/index/manage/charging'}
+            {label:'课程计费管理',path:'/index/manage/taskCharge'},
+            {label:'付费记录汇总',path:'/index/manage/payRecord'}
         ]
     },
     {
-        label:'学生学习情况',
-        icon:'am-icon-table',
+        label:'学习统计',
+        icon:'am-icon-area-chart',
         children:[
-            {label:'成绩管理',path:'/index/manage/charging'},
-            {label:'学习统计',path:'/index/manage/statistics'}
+            {label:'课程成绩查看',path:'/index/statistics/scorePreview'},
+            {label:'学生学习统计',path:'/index/statistics/learningStatistics'}
         ]
     },
     {
         label:'课程资源',
-        icon:'am-icon-table',
+        icon:'am-icon-file-video-o',
         children:[
             {label:'课程管理',path:'/index/course/courseManage'},
             {label:'资源管理',path:'/index/course/resourceManage'}
@@ -33,7 +34,7 @@ export default [
     },
     {
         label:'教学管理',
-        icon:'am-icon-table',
+        icon:'am-icon-th',
         children:[
             {label:'学期管理',path:'/index/course/term'},
             {label:'课程计划管理',path:'/index/course/teachTackManage'},
@@ -44,7 +45,7 @@ export default [
     },
     {
         label:'考试管理',
-        icon:'am-icon-table',
+        icon:'am-icon-pencil-square-o',
         children:[
             {label:'在线考试',path:'/index/exam/examManage'},
             {label:'在线练习',path:'/index/exam/practiceManage'},
@@ -53,14 +54,14 @@ export default [
     },
     {
         label:'成绩管理',
-        icon:'am-icon-table',
+        icon:'am-icon-wpforms',
         children:[
-            {label:'成绩管理',path:'/index/statistics/charging'}
+            {label:'课程成绩管理',path:'/index/statistics/scoreManage'}
         ]
     },
     {
         label:'讲座研讨',
-        icon:'am-icon-table',
+        icon:'am-icon-align-justify',
         children:[
             {label:'讲座研讨管理',path:'/index/lecture/manage'},
             {label:'报名审核',path:'/index/lecture/entry'},
@@ -68,8 +69,15 @@ export default [
         ]
     },
     {
+        label:'学习统计',
+        icon:'am-icon-area-chart',
+        children:[
+            {label:'学生学习统计',path:'/index/statistics/studyStatistics'}
+        ]
+    },
+    {
         label:'课程中心',
-        icon:'am-icon-table',
+        icon:'am-icon-file-video-o',
         children:[
             {label:'在线课程',path:'/index/course/coursePreview'},
             {label:'讲座报告',path:'/index/course/lecturePreview'},
@@ -78,7 +86,7 @@ export default [
     },
     {
         label:'讲座研讨中心',
-        icon:'am-icon-table',
+        icon:'am-icon-university',
         children:[
             {label:'讲座预览',path:'/index/lecture/lecturePreview'},
             {label:'课程研讨预览',path:'/index/lecture/discussPreview'}
@@ -86,7 +94,7 @@ export default [
     },
     {
         label:'我的课程',
-        icon:'am-icon-table',
+        icon:'am-icon-play-circle-o',
         children:[
             {label:'课程学习',path:'/index/course/courseStudy'},
             {label:'课程作业',path:'/index/homework/unfinished'},
@@ -96,7 +104,7 @@ export default [
     },
     {
         label:'我的考试',
-        icon:'am-icon-table',
+        icon:'am-icon-pencil-square-o',
         children:[
             {label:'待完成考试',path:'/index/exam/unfinishedExam'},
             {label:'已完成考试',path:'/index/exam/finishedExam'},
@@ -104,7 +112,7 @@ export default [
     },
     {
         label:'我的讲座研讨',
-        icon:'am-icon-table',
+        icon:'am-icon-align-justify',
         children:[
             {label:'已报名讲座研讨',path:'/index/lecture/entried'},
             {label:'讲座直播',path:'/index/lecture/live'},
@@ -113,10 +121,17 @@ export default [
     },
     {
         label:'我的学习统计',
-        icon:'am-icon-table',
+        icon:'am-icon-graduation-cap',
         children:[
-            {label:'学习成果',path:''},
-            {label:'课程成绩',path:''},
+            {label:'课程成绩查看',path:'/index/statistics/personScore'},
+            {label:'学习成果',path:'/index/statistics/achievement'}
+        ]
+    },
+    {
+        label:'我的订单中心',
+        icon:'am-icon-shopping-cart',
+        children:[
+            {label:'课程付费记录',path:'/index/manage/personCharge'}
         ]
     },
 ]
