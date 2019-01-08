@@ -44,7 +44,7 @@
                         this.$router.push({path: '/index'});
                     } else {
                         this.loading=false;
-                        this.$message.error(`出错啦【${res.data}】，请稍后重试！😅`);
+                        this.$message.error(`出错啦【${res.errorMessageList}】，请稍后重试！😅`);
                     }
                 });
             },

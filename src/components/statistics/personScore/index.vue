@@ -13,6 +13,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="search" size="middle" icon="el-icon-search">查询</el-button>
+                        <el-button type="primary" @click="" size="middle" icon="el-icon-download">导出成绩报表</el-button>
                     </el-form-item>
                 </el-form>
             </el-header>

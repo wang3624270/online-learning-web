@@ -1,7 +1,7 @@
 export const perTypeCodes=[
     {label:'全部',value:''},
     {label:'注册用户',value:'U'},
-    {label:'学生',value:'S'},
+    {label:'在校学生',value:'S'},
     {label:'教师',value:'T'},
     {label:'管理员',value:'M'}
 ];

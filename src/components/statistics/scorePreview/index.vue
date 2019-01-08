@@ -32,7 +32,7 @@
                     <el-table-column prop="endDate" label="结束日期" width="100"></el-table-column>
                     <el-table-column label="课程成绩">
                         <template slot-scope="scope">
-                            <el-button @click="editCoursePerson(scope.row.taskId)" type="text" size="small">查看/编辑</el-button>
+                            <el-button @click="editCoursePerson(scope.row.taskId)" type="text" size="small">查看</el-button>
                         </template>
                     </el-table-column>
                 </el-table>

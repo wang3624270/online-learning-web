@@ -47,7 +47,7 @@
                     return;
                 }
                 this.$router.push({
-                    name: 'livePlayer',
+                    name: 'videoStudy',
                     query: {
                         taskId:item.taskId,
                         courseId:item.courseId,

@@ -2,18 +2,18 @@
     <div>
         <el-dialog title="注册账号"  :center="true" :visible.sync="show" width="600px" v-loading="loading" :close-on-click-modal="false" :close-on-press-escape="false">
             <el-form :model="form"  label-width="120px">
-                <el-form-item label="手机号">
+                <el-form-item label="手机号" required="true">
                     <el-input class="_input-width" type="password" placeholder="请输入手机号（登录名）"></el-input>
                 </el-form-item>
-                <el-form-item label="验证码">
+                <el-form-item label="验证码" required="true">
                     <el-input placeholder="请输入验证码" style="width:300px;">
                         <el-button slot="append">获取短信验证码</el-button>
                     </el-input>
                 </el-form-item>
-                <el-form-item label="密码">
+                <el-form-item label="密码" required="true">
                     <el-input class="_input-width" type="password" placeholder="请输入密码"></el-input>
                 </el-form-item>
-                <el-form-item label="重复输入密码">
+                <el-form-item label="重复输入密码" required="true">
                     <el-input class="_input-width" type="password" placeholder="请重复输入密码"></el-input>
                 </el-form-item>
                 <el-form-item label="姓名">
