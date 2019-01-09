@@ -102,7 +102,7 @@
 
                     <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                         <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                            <span class="tpl-header-list-user-nick">{{perName}}</span><span class="tpl-header-list-user-ico"> <img src="@/components/framepage/assets/img/user.png"></span>
+                            <span class="tpl-header-list-user-nick">{{this.perName}}</span><span class="tpl-header-list-user-ico"> <img src="@/components/framepage/assets/img/user.png"></span>
                         </a>
                         <ul class="am-dropdown-content">
                             <li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
@@ -140,7 +140,6 @@
         },
         beforeMount(){
             this.loading=true;
-            this.initPersonInfo();
         },
         beforeMount(){
             this.sectionName = this.$route.query.sectionName;
@@ -148,6 +147,7 @@
         mounted(){
             iscroll(window, document, Math);
             app();
+            this.initPersonInfo();
         },
         methods:{
             initPersonInfo(){

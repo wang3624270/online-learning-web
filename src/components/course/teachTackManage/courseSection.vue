@@ -28,7 +28,7 @@
                 <el-table-column prop="courseName" label="在线练习" width="120px">
                     <template slot-scope="scope" >
                         <el-button @click="previewPractice(scope.row.videoAcc)" type="text" size="mini" v-if="scope.row.practiceId">预览</el-button>
-                        <el-button @click="cancel(scope.row.videoId)" type="text" size="mini" v-if="scope.row.practiceId">取消关联</el-button>
+                        <el-button @click="cancel(scope.row.id)" type="text" size="mini" v-if="scope.row.practiceId">取消关联</el-button>
                         <el-button @click="relationPractice(scope.row.sectionId)" type="text" size="mini" v-else>关联</el-button>
                     </template>
                 </el-table-column>

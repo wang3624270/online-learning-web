@@ -63,7 +63,7 @@
             search(){
                 this.loading=true;
                 let params={
-                    examId:this.examId
+                    practiceId:this.practiceId
                 };
                 ExamInterface.getPracticeQustionList(params).then( (res) => {
                     this.loading=false;
