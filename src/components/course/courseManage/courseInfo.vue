@@ -97,7 +97,11 @@
         },
         computed:{
             imageUrl(){
-                return CourseInterface.coverImgUrl(this.form.coverImgAcc);
+                if(this.form.coverImgAcc!=''){
+                    return CourseInterface.coverImgUrl(this.form.coverImgAcc);
+                }else {
+                    return undefined;
+                }
             }
         },
         beforeMount(){

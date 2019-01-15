@@ -28,8 +28,8 @@
         data() {
             return {
                 form:{
-                    loginName:'student',
-                    password:'1',
+                    loginName:'',
+                    password:'',
                 },
                 loading:false,
                 show:false
