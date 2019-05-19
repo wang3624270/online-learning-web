@@ -12,7 +12,7 @@
                     </div>
                     <div id="word-mark">
                         <h1>
-                            <a href="#">高校开放式学习平台</a>
+                            <a href="#">文学生活馆学习社区</a>
                         </h1>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                             <a href="/" class="scroll">主页</a>
                         </li>
                         <li>
-                            <a class="scroll" href="#about">平台介绍</a>
+                            <a class="scroll" href="#about">社区介绍</a>
                         </li>
                         <li>
                             <a class="scroll" href="#services">在线课程</a>
@@ -63,7 +63,7 @@
                 <div class="banner-info text-uppercase">
                     <h6 data-aos="fade-right">Shandong University</h6>
                     <h5 data-aos="fade-right">开放性、多形式、兼顾线上和线下</h5>
-                    <h3 data-text="一站式学习服务平台">一站式学习服务平台</h3>
+                    <h3 data-text="一站式学习服务社区">一站式学习服务社区</h3>
                     <div class="ban-buttons mt-3" data-aos="fade-right">
                         <a class="btn work scroll" href="#services">在线课程</a>
                         <a class="btn work scroll active" href="#projects">讲座研讨</a>
@@ -81,7 +81,7 @@
                 <div class="inner-sec-w3ls py-lg-5 py-4">
                     <div class="info-about text-center">
                         <h4 class="sub-tittle-w3">Introduction</h4>
-                        <h3 class="tittle-w3 text-uppercase mb-lg-5 mb-3">欢迎访问高校开放式学习平台</h3>
+                        <h3 class="tittle-w3 text-uppercase mb-lg-5 mb-3">欢迎访问文学生活馆学习社区</h3>
                         <div class="row mt-lg-5 mt-3">
                             <div class="col-lg-4 progress-info-content text-left">
                                 <div class="progress-one my-lg-5" data-aos="fade-up">
@@ -139,7 +139,7 @@
             <div class="container">
                 <div class="inner-sec-w3ls py-md-5 py-4">
                     <h4 class="sub-tittle-w3 text-uppercase text-center">Online Course</h4>
-                    <h3 class="tittle-w3 text-uppercase mb-lg-5 mb-3 text-center text-white">平台在线课程介绍</h3>
+                    <h3 class="tittle-w3 text-uppercase mb-lg-5 mb-3 text-center text-white">在线课程介绍</h3>
                     <div class="price-right">
                         <div class="tabs">
                             <ul class="nav nav-pills my-md-5 my-3 justify-content-center" id="pills-tab" role="tablist">
@@ -170,7 +170,7 @@
                                                     <div class="card-body">
                                                         <i class="far fa-lightbulb mb-4"></i>
                                                         <h5 class="card-title text-uppercase">课程问答</h5>
-                                                        <p class="card-text">在课程学习过程中，学生需要完成课程对应的在线练习，并可以针对课程内容可以在平台中进行提问和交流。</p>
+                                                        <p class="card-text">在课程学习过程中，学生需要完成课程对应的在线练习，并可以针对课程内容可以在系统中进行提问和交流。</p>
                                                     </div>
                                                 </div>
 
@@ -199,7 +199,7 @@
         <section class="experience py-lg-5 py-4" id="experience">
             <div class="timeline py-lg-5 py-3">
                 <h4 class="sub-tittle-w3 text-uppercase text-center">Online Examination</h4>
-                <h3 class="tittle-w3 text-uppercase mb-lg-5 mb-3 text-center">平台课程在线考试</h3>
+                <h3 class="tittle-w3 text-uppercase mb-lg-5 mb-3 text-center">课程在线考试</h3>
                 <div id="my-timeline"></div>
             </div>
 
@@ -460,7 +460,7 @@
                                 </div>
                                 <div class="address-right text-center">
                                     <h6 class="my-3">地址</h6>
-                                    <p>山东大学齐鲁软件学院</p>
+                                    <p>山东省济南市山东大学</p>
                                 </div>
                             </div>
 
@@ -512,7 +512,7 @@
                             </li>
                             <li class="my-2">
                                 <a href="#about" class="nav-link scroll">
-                                    平台介绍
+                                    社区介绍
                                 </a>
                             </li>
                             <li class="my-2">
@@ -536,7 +536,7 @@
                     <div class="col-lg-4 footer-end-grid mt-md-0 mt-sm-5" data-aos="fade-up">
                         <h2>
                             <a href="/">
-                                <i class="fas logo-mini"></i>高校开放式学习平台
+                                <i class="fas logo-mini"></i>文学生活馆学习社区
                             </a>
                         </h2>
                     </div>
